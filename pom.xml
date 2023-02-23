@@ -43,16 +43,31 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+                <dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+                <dependency>
+                    <groupId>org.geotools</groupId>
+                    <artifactId>gt-geojson</artifactId>
+                    <version>13.0</version>
+                </dependency>
 	</dependencies>
-
+        <repositories>
+            <repository>
+                <id>osgeo-alt</id>
+                <url>https://repo.osgeo.org/repository/release/</url>
+            </repository>
+            <repository>
+                <id>geomajas</id>
+                <name>Geomajas Maven Repository</name>
+                <url>http://maven.geomajas.org/(http://maven.geomajas.org/)</url>
+            </repository>
+        </repositories>
 	<build>
 		<plugins>
 			<plugin>
@@ -61,5 +76,6 @@
 			</plugin>
 		</plugins>
 	</build>
+
 
 </project>
