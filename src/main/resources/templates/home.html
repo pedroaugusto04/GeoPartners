@@ -8,8 +8,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <title>GeoPartners</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" th:href="@{/styles/home.css}" />
     </head>
     <body>
-        <h1> TESTE </h1>
+        <nav class = "header">
+            <h1> GeoPartners </h1>
+        </nav>
+        <section class = "main">
+            <nav class = "menu-options">
+                <a href="#" class="active">HOME</a>
+                <a href="#">REGISTER PARTNER</a>
+                <a href="#">UPDATE PARTNER</a>
+                <a href="#">DELETE PARTNER</a>
+                <a href="#">SEARCH BEST PARTNER FOR YOU</a>    
+            </nav>
+            <div class = "main-img">
+                <img th:src="@{/styles/images/image.jpg}" alt="Image">    
+            </div>
+        </section>
     </body>
 </html>
