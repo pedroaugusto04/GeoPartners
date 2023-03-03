@@ -4,9 +4,19 @@
  */
 package com.pedro.geoPartners.controller;
 
-import ch.qos.logback.core.model.Model;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.pedro.geoPartners.model.Partner;
+import com.pedro.geoPartners.service.PartnerService;
+import java.io.IOException;
+import java.util.List;
+import org.locationtech.jts.geom.Geometry;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -15,9 +25,76 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/geopartners")
 public class PartnerController {
+    
+    private PartnerService partnerService;
+
+    public PartnerController(PartnerService partnerService) {
+        this.partnerService = partnerService;
+    }
+    
 
     @RequestMapping("")
-    public String home(Model model){
+    public String home(){
         return "home";
+    }
+    
+    @RequestMapping("/register")
+    public String registerPage(){
+        return "register";
+    }
+    
+    
+    @RequestMapping("/update")
+    public String updatePage(){
+        return "update";
+    }
+    
+    
+    @RequestMapping("/delete")
+    public String deletePage(){
+        return "delete";
+    }
+    
+    @RequestMapping("/search")
+    public String searchPage(){
+        return "search";
+    }
+    
+    
+    @RequestMapping("/partners")
+    public String partnersPage(){
+        return "partners";
+    }
+    
+    @PostMapping("/logic/register")
+    @ResponseBody
+    public ResponseEntity<String> registerLogic(@RequestBody Partner partner) throws JsonProcessingException{
+        partnerService.savePartner(partner);
+        return ResponseEntity.ok("Partner successfully created!");
+    }
+    
+    
+    @PostMapping("/logic/update")
+    public String updateLogic(){
+        return "update";
+    }
+    
+    
+    @RequestMapping("/logic/delete")
+    public String deleteLogic(){
+        return "delete";
+    }
+    
+    @PutMapping("/logic/search")
+    @ResponseBody
+    public List<Partner> searchLogic(Geometry clientAddress) throws IOException{
+        return partnerService.searchBestPartners(clientAddress);
+    }
+    
+    
+    @RequestMapping("/logic/partners")
+    @ResponseBody
+    public List<Partner> partnersLogic(){
+        return partnerService.getPartners();
     }
 }

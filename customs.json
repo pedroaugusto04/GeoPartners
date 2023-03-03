@@ -1,6 +1,12 @@
 {
     "elements": {},
     "attributes": {
+        "th:text": {
+            "context": "h1"
+        },
+        "th:src": {
+            "context": "img"
+        },
         "th:href": {
             "context": "link"
         }

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+    <head>
+        <title>GeoPartners</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" th:href="@{/styles/form.css}" />
+    </head>
+    <body>
+        <main class = "main">
+            <div class = "title">
+                <h1> DELETE PARTNER</h1> 
+            </div>
+            <form id = "delete-form">
+                <label for="ownerName"> Owner Name: </label>
+                <input type="text" name="ownerName" placeholder="Owner Name"><br>
+                <label for="tradingName"> Trading Name: </label>
+                <input type="text" name="tradingName" placeholder="Trading Name"><br>
+                <label for="document"> Document: </label>
+                <input type="text" name="document" placeholder="Document"><br>
+                <label for="coverageArea"> Coverage Area: <br><br></label>
+                <textarea  name="coverageArea" rows="15" cols="50" placeholder = "Coverage Area (JSON)"></textarea><br>
+                <button type = "submit">SUBMIT</button>
+            </form>
+        </main>
+    </body>
+</html>

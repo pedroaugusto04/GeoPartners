@@ -16,15 +16,21 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         </nav>
         <section class = "main">
             <nav class = "menu-options">
-                <a href="#" class="active">HOME</a>
-                <a href="#">REGISTER PARTNER</a>
-                <a href="#">UPDATE PARTNER</a>
-                <a href="#">DELETE PARTNER</a>
-                <a href="#">SEARCH BEST PARTNER FOR YOU</a>    
+                <a href="/geopartners/partners">SEE PARTNERS</a>
+                <a href="/geopartners/register">REGISTER PARTNER</a>
+                <a href="/geopartners/update">UPDATE PARTNER</a>
+                <a href="/geopartners/delete">DELETE PARTNER</a>
+                <a href="/geopartners/search">SEARCH BEST PARTNER FOR YOU</a>    
             </nav>
             <div class = "main-img">
-                <img th:src="@{/styles/images/image.jpg}" alt="Image">    
+                <img th:src="@{/styles/images/image.png}" alt="Image"> 
             </div>
         </section>
+        <footer>
+            <div class = "credits">
+                <p> Credits:</p>
+                <a href="https://www.freepik.com/free-vector/traveler-with-spyglass-looking-huge-globe-with-location-pin-man-choosing-destination-flat-vector-illustration-vacation-traveling-concept-banner-website-design-landing-web-page_28480911.htm#query=person%20searching%20world&position=1&from_view=search&track=ais">Image by pch.vector</a> on Freepik
+            </div>
+        </footer>
     </body>
 </html>

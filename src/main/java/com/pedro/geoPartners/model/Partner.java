@@ -4,12 +4,14 @@
  */
 package com.pedro.geoPartners.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.util.UUID;
-
+import org.locationtech.jts.geom.MultiPolygon;
+import org.locationtech.jts.geom.Point;
 
 /**
  *
@@ -17,15 +19,36 @@ import java.util.UUID;
  */
 @Entity
 public class Partner {
-    
+
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID )
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
     private String tradingName;
     private String ownerName;
     private String document;
-    private String coverageArea; 
-    private String address; 
+
+    @Column(columnDefinition = "geometry(Point,4326)")
+    private Point address;
+
+    @Column(columnDefinition = "geometry(MultiPolygon,4326)")
+    private MultiPolygon coverageArea;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getTradingName() {
+        return tradingName;
+    }
+
+    public void setTradingName(String tradingName) {
+        this.tradingName = tradingName;
+    }
 
     public String getOwnerName() {
         return ownerName;
@@ -35,44 +58,27 @@ public class Partner {
         this.ownerName = ownerName;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public String getTradingName() {
-        return tradingName;
-    }
-
     public String getDocument() {
         return document;
-    }
-
-
-    public void setTradingName(String tradingName) {
-        this.tradingName = tradingName;
     }
 
     public void setDocument(String document) {
         this.document = document;
     }
 
-    public String getCoverageArea() {
-        return coverageArea;
-    }
-
-    public void setCoverageArea(String coverageArea) {
-        this.coverageArea = coverageArea;
-    }
-
-    public String getAddress() {
+    public Point getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Point address) {
         this.address = address;
+    }
+
+    public MultiPolygon getCoverageArea() {
+        return coverageArea;
+    }
+
+    public void setCoverageArea(MultiPolygon coverageArea) {
+        this.coverageArea = coverageArea;
     }
 }

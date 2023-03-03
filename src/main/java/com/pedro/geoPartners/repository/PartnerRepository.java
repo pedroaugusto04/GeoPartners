@@ -14,11 +14,10 @@ import org.springframework.stereotype.Repository;
  *
  * @author pedro
  */
-
 @Repository
 public interface PartnerRepository extends JpaRepository<Partner, UUID> {
-    
-    
+
     @Override
     public Optional<Partner> findById(UUID id);
+   
 }
