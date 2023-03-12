@@ -61,22 +61,27 @@ document.querySelector("#register-form").addEventListener("submit", function(eve
     return turf.polygon(geometryGeoJson.geometry.coordinates);
   });
 
-  let multiPolygonGeoJson = turf.multiPolygon(polygons);
+  let multiPolygon = turf.multiPolygon(polygons.map(polygon => polygon.geometry.coordinates));
 
+  multiPolygon = {
+    "type": "MultiPolygon",
+    "coordinates": multiPolygon.geometry.coordinates
+  };
+  
+  let multiPolygonGeoJson = JSON.stringify(multiPolygon);
+  
+  let point;
   if (marker) {
-    let point = {
-      "type": "Feature",
-      "properties": {},
-      "geometry": {
+    point = {
       "type": "Point",
       "coordinates": [marker.getLatLng().lng, marker.getLatLng().lat]
       }
-    }
-    var pointGeoJson = JSON.stringify(point);
-  } else {
+    } else {
       alert("No address selected");
       return;
-  }
+    }
+
+  var pointGeoJson = JSON.stringify(point);
 
   formData.append("coverageArea",multiPolygonGeoJson);
 
@@ -121,8 +126,4 @@ function geocode(address) {
     console.error(error);
     alert('Address search error');
   });
-}
-
-function getPoint(){
-  //
 }

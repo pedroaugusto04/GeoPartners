@@ -25,76 +25,69 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/geopartners")
 public class PartnerController {
-    
+
     private PartnerService partnerService;
 
     public PartnerController(PartnerService partnerService) {
         this.partnerService = partnerService;
     }
-    
 
-    @RequestMapping("")
-    public String home(){
+    @RequestMapping("/")
+    public String home() {
         return "home";
     }
-    
+
     @RequestMapping("/register")
-    public String registerPage(){
+    public String registerPage() {
         return "register";
     }
-    
-    
+
     @RequestMapping("/update")
-    public String updatePage(){
+    public String updatePage() {
         return "update";
     }
-    
-    
+
     @RequestMapping("/delete")
-    public String deletePage(){
+    public String deletePage() {
         return "delete";
     }
-    
+
     @RequestMapping("/search")
-    public String searchPage(){
+    public String searchPage() {
         return "search";
     }
-    
-    
+
     @RequestMapping("/partners")
-    public String partnersPage(){
+    public String partnersPage() {
         return "partners";
     }
-    
+
     @PostMapping("/logic/register")
     @ResponseBody
-    public ResponseEntity<String> registerLogic(@RequestBody Partner partner) throws JsonProcessingException{
+    public ResponseEntity<String> registerLogic(@RequestBody Partner partner) throws JsonProcessingException {
         partnerService.savePartner(partner);
         return ResponseEntity.ok("Partner successfully created!");
     }
-    
-    
+
     @PostMapping("/logic/update")
-    public String updateLogic(){
+    public String updateLogic() {
         return "update";
     }
-    
-    
+
     @RequestMapping("/logic/delete")
-    public String deleteLogic(){
+    public String deleteLogic() {
         return "delete";
     }
-    
+
     @PutMapping("/logic/search")
     @ResponseBody
-    public List<Partner> searchLogic(Geometry clientAddress) throws IOException{
+    public List<Partner> searchLogic(Geometry clientAddress) throws IOException {
         return partnerService.searchBestPartners(clientAddress);
     }
-    
-    
+
     @RequestMapping("/logic/partners")
     @ResponseBody
-    public List<Partner> partnersLogic(){
+    public List<Partner> partnersLogic() {
         return partnerService.getPartners();
     }
 }

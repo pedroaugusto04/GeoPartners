@@ -4,14 +4,18 @@
  */
 package com.pedro.geoPartners.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.pedro.geoPartners.util.GeometryConverter;
+import com.pedro.geoPartners.util.GeometryDeserializer;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.util.UUID;
-import org.locationtech.jts.geom.MultiPolygon;
-import org.locationtech.jts.geom.Point;
+import org.locationtech.jts.geom.Geometry;
+
 
 /**
  *
@@ -29,10 +33,14 @@ public class Partner {
     private String document;
 
     @Column(columnDefinition = "geometry(Point,4326)")
-    private Point address;
+    @JsonDeserialize(using = GeometryDeserializer.class)
+    @Convert(converter = GeometryConverter.class)
+    private Geometry address;
 
     @Column(columnDefinition = "geometry(MultiPolygon,4326)")
-    private MultiPolygon coverageArea;
+    @JsonDeserialize(using = GeometryDeserializer.class)
+    @Convert(converter = GeometryConverter.class)
+    private Geometry coverageArea;
 
     public UUID getId() {
         return id;
@@ -66,19 +74,21 @@ public class Partner {
         this.document = document;
     }
 
-    public Point getAddress() {
+    public Geometry getAddress() {
         return address;
     }
 
-    public void setAddress(Point address) {
+    public void setAddress(Geometry address) {
         this.address = address;
     }
 
-    public MultiPolygon getCoverageArea() {
+    public Geometry getCoverageArea() {
         return coverageArea;
     }
 
-    public void setCoverageArea(MultiPolygon coverageArea) {
+    public void setCoverageArea(Geometry coverageArea) {
         this.coverageArea = coverageArea;
     }
+    
+    
 }
