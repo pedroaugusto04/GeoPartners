@@ -10,6 +10,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" th:href="@{/styles/search.css}" />
         <script th:src="@{/scripts/searchScript.js}" defer></script>
+        <script th:src="@{https://unpkg.com/axios/dist/axios.min.js}"></script>
+        <link rel="stylesheet" th:href="@{https://unpkg.com/leaflet@1.9.3/dist/leaflet.css}"
+        crossorigin=""/>
+        <script th:src="@{https://unpkg.com/leaflet@1.9.3/dist/leaflet.js}"
+        crossorigin=""></script>
+        <link rel="stylesheet" th:href="@{https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.css}" />  
+        <script th:src="@{https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.min.js}"></script>  
+        <script th:src="@{https://unpkg.com/@turf/turf@latest}"></script>
     </head>
     <body>
         <main class = "main">
@@ -17,8 +25,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 <h1> BEST PARTNERS</h1> 
             </div>
             <form id = "search-form">
-                <label for="address"> Insert your Address: <br><br></label>
-                <textarea  th:name="address" rows="5" cols="50" placeholder = "Address (JSON)"></textarea><br>
+                <label for="address"> Insert Your Address: <br><br></label>
+                <div id="map" style = " height: 400px; width: 1000px;";></div><br>
                 <button type = "submit">SUBMIT</button>
             </form>
             <div class = "div-table">

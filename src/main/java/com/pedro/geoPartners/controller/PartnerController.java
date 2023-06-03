@@ -9,7 +9,6 @@ import com.pedro.geoPartners.model.Partner;
 import com.pedro.geoPartners.service.PartnerService;
 import java.io.IOException;
 import java.util.List;
-import org.locationtech.jts.geom.Geometry;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -76,17 +75,17 @@ public class PartnerController {
     }
 
     @RequestMapping("/logic/delete")
-    public ResponseEntity<String> deleteLogic(@RequestBody String document) {
-        partnerService.deletePartner(document);
+    public ResponseEntity<String> deleteLogic(@RequestBody Partner partner) {
+        partnerService.deletePartner(partner.getDocument());
         return ResponseEntity.ok("Partner sucessfully deleted!");
     }
 
     @PutMapping("/logic/search")
     @ResponseBody
-    public List<Partner> searchLogic(Geometry clientAddress) throws IOException {
-        return partnerService.searchBestPartners(clientAddress);
+    public List<Partner> searchLogic(@RequestBody Partner partner) throws IOException {
+        return partnerService.searchBestPartners(partner.getAddress());
     }
-
+    
     @RequestMapping("/logic/partners")
     @ResponseBody
     public List<Partner> partnersLogic() {

@@ -69,64 +69,22 @@ public class PartnerServiceImpl implements PartnerService {
 
         Map<Partner, Double> bestPartners = new HashMap<Partner, Double>();
 
-        // formatting to haversine
-        String clientAddressFormat = formatJson(clientAddressPoint.toString());
-        double clientAddressArray[] = jsonToDoubleArray(clientAddressFormat);
-
         while (iter.hasNext()) {
             Partner partner = iter.next();
 
-            //formatting to haversine
-            String partnerAddressFormat = formatJson(partner.getAddress().toString());
-            double partnersAddressArrayDouble[] = jsonToDoubleArray(partnerAddressFormat);
-
             if (clientAddressPoint.within(partner.getCoverageArea())) {
-                // calculating the shortest distance between the points (haversine)
-                double haversineResult = shorterDistanceKm(clientAddressArray[0], clientAddressArray[1], partnersAddressArrayDouble[0],
-                        partnersAddressArrayDouble[1]);
-                bestPartners.put(partner, haversineResult);
+                // calculating the distance between the points 
+                double distance = clientAddressPoint.distance(partner.getAddress());
+                bestPartners.put(partner, distance);
             }
         }
         //sorting
         List<Partner> sortedBestPartners = bestPartners.entrySet()
                 .stream()
-                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .sorted(Map.Entry.comparingByValue(Comparator.naturalOrder()))
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
-
+        
         return sortedBestPartners;
-    }
-
-    public static String formatJson(String json) {
-        json = json.replaceAll("\\{", "");
-        json = json.replaceAll("}", "");
-        json = json.replaceAll("\\[", "");
-        json = json.replaceAll("]", "");
-        json = json.replaceAll("\".*?\":", "");
-        return json;
-    }
-
-    public static double[] jsonToDoubleArray(String json) {
-        String jsonArrayString[] = json.split(",");
-        double jsonArrayDouble[] = new double[jsonArrayString.length];
-
-        for (int i = 0; i < jsonArrayString.length; i++) {
-            jsonArrayDouble[i] = Double.parseDouble(jsonArrayString[i]);
-        }
-        return jsonArrayDouble;
-    }
-
-    public static double shorterDistanceKm(double iniLong, double iniLat, double finLong, double finLat) {
-        final int EARTH_RADIUS = 6371;
-        double diffLong = Math.toRadians(finLong - iniLong);
-        double diffLat = Math.toRadians(finLat - iniLat);
-
-        double startLatRadius = Math.toRadians(iniLat);
-        double endLatRadius = Math.toRadians(finLat);
-
-        double a = Math.pow(Math.sin(diffLat / 2), 2) + Math.pow(Math.sin(diffLong / 2), 2) * Math.cos(startLatRadius) * Math.cos(endLatRadius);
-        double c = 2 * Math.asin(Math.sqrt(a));
-
-        return EARTH_RADIUS * c;
     }
 }
