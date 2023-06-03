@@ -1,4 +1,5 @@
 var marker;
+var markers = new Array();
 // creating map
 let map = L.map('map').setView([51.505, -0.09], 13);
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -34,6 +35,7 @@ L.Control.Search = L.Control.extend({
 
         L.DomEvent.addListener(form, 'submit', function (event) {
             event.preventDefault();
+            cleanTable();
             var address = input.value;
             geocode(address);
         });
@@ -45,6 +47,7 @@ L.Control.Search = L.Control.extend({
 L.control.search = function (options) {
     return new L.Control.Search(options);
 }
+
 L.control.search().addTo(map);
 
 // sending form data to server
@@ -108,9 +111,16 @@ function loadTable(data) {
         idCell.innerHTML = partner.id
         ownerNameCell.innerHTML = partner.ownerName;
         tradingNameCell.innerHTML = partner.tradingName;
+        insertPoint(partner.address, count);
     }
 }
 
+function cleanTable() {
+    const table = document.querySelector("#table");
+    while (table.rows.length > 1) {
+        table.deleteRow(1);
+    }
+}
 // map response
 function geocode(address) {
     const url = `https://nominatim.openstreetmap.org/search?q=${address}&format=json&limit=1`;
@@ -121,17 +131,51 @@ function geocode(address) {
                     alert('Invalid address');
                     return;
                 }
+                for (i = 0; i < markers.length; i++) {
+                    map.removeLayer(markers[i]);
+                }
                 let lat = parseFloat(data[0].lat);
                 let lon = parseFloat(data[0].lon);
                 map.setView([lat, lon]);
-                if (marker) {
-                    map.removeLayer(marker);
-                }
+                map.setView([lat, lon]);
                 marker = L.marker([lat, lon]).addTo(map);
+                markers.push(marker);
                 marker.bindPopup(`${address}`);
             })
             .catch(error => {
                 console.error(error);
                 alert('Address search error');
             });
+}
+
+
+var redIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+});
+
+var goldIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+});
+
+
+function insertPoint(address, count) {
+    let lat = parseFloat(address.coordinates[1]);
+    let lon = parseFloat(address.coordinates[0]); // longitude first element
+    map.setView([lat, lon]);
+    if (count === 1) {
+        marker = L.marker([lat, lon], {icon: goldIcon}).addTo(map); // gold to best partner
+        markers.push(marker);
+    } else {
+        marker = L.marker([lat, lon], {icon: redIcon}).addTo(map);
+        markers.push(marker);
+    }
+    marker.bindPopup(count + " Place");
 }

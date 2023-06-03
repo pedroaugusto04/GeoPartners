@@ -6,7 +6,9 @@ package com.pedro.geoPartners.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.pedro.geoPartners.util.GeometryDeserializer;
+import com.pedro.geoPartners.util.GeometrySerializer;
 import com.pedro.geoPartners.util.GeometryType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,11 +36,13 @@ public class Partner {
     private String document;
 
     @JsonDeserialize(using = GeometryDeserializer.class)
+    @JsonSerialize(using = GeometrySerializer.class)
     @Type(GeometryType.class)
     @Column(columnDefinition = "geometry(Point,4326)")
     private Geometry address;
 
     @JsonDeserialize(using = GeometryDeserializer.class)
+    @JsonSerialize(using = GeometrySerializer.class)
     @Type(GeometryType.class)
     @Column(columnDefinition = "geometry(MultiPolygon,4326)")
     private Geometry coverageArea;

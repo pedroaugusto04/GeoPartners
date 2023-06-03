@@ -84,8 +84,8 @@ public class PartnerController {
     @ResponseBody
     public List<Partner> searchLogic(@RequestBody Partner partner) throws IOException {
         return partnerService.searchBestPartners(partner.getAddress());
-    }
-    
+}
+
     @RequestMapping("/logic/partners")
     @ResponseBody
     public List<Partner> partnersLogic() {
