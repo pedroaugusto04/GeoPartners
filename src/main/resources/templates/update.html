@@ -9,22 +9,31 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" th:href="@{/styles/form.css}" />
+        <script th:src="@{/scripts/updateScript.js}" defer></script>
+        <script th:src="@{https://unpkg.com/axios/dist/axios.min.js}"></script>
+        <link rel="stylesheet" th:href="@{https://unpkg.com/leaflet@1.9.3/dist/leaflet.css}"
+        crossorigin=""/>
+        <script th:src="@{https://unpkg.com/leaflet@1.9.3/dist/leaflet.js}"
+        crossorigin=""></script>
+        <link rel="stylesheet" th:href="@{https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.css}" />  
+        <script th:src="@{https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.min.js}"></script>  
+        <script th:src="@{https://unpkg.com/@turf/turf@latest}"></script>
     </head>
     <body>
         <main class = "main">
             <div class = "title">
-                <h1> UPDATE YOUR PARTNER</h1> 
+                <h1> UDPATE PARTNER</h1> 
             </div>
             <form id = "update-form">
-                <label for="ownerName"> Owner Name: </label>
-                <input type="text" name="ownerName" placeholder="Owner Name"><br>
-                <label for="tradingName"> Trading Name: </label>
-                <input type="text" name="tradingName" placeholder="Trading Name"><br>
                 <label for="document"> Document: </label>
-                <input type="text" name="document" placeholder="Document"><br>
-                <label for="coverageArea"> Coverage Area: <br><br></label>
-                <textarea  name="coverageArea" rows="15" cols="50" placeholder = "Coverage Area (JSON)"></textarea><br>
-                <button type = "submit">SUBMIT</button>
+                <input type="text" th:name="document" placeholder="Document"><br>
+                <label for="ownerName"> New Owner Name: </label>
+                <input type="text" th:name="ownerName" placeholder="Owner Name"><br>
+                <label for="tradingName"> New Trading Name: </label>
+                <input type="text" th:name="tradingName" placeholder="Trading Name"><br>
+                <label for="coverageArea"> New Address / Coverage Area: <br><br></label>
+                <div id="map" style = " height: 300px; width: 800px;";></div><br>
+                <button id = "submit" type = "submit">SUBMIT</button>
             </form>
         </main>
     </body>

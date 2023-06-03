@@ -15,13 +15,9 @@ function loadTable(data){
         const ownerNameCell = row.insertCell(1);
         const tradingNameCell = row.insertCell(2);
         const documentCell = row.insertCell(3);
-        const coverageAreaCell = row.insertCell(4);
-        const addressCell = row.insertCell(5);
         idCell.innerHTML = partner.id
         ownerNameCell.innerHTML = partner.ownerName;
         tradingNameCell.innerHTML = partner.tradingName;
         documentCell.innerHTML = partner.document;
-        coverageAreaCell.innerHTML = partner.coverageArea;
-        addressCell.innerHTML = partner.address;
     }
 }

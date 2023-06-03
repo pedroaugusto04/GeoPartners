@@ -4,18 +4,18 @@
  */
 package com.pedro.geoPartners.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.pedro.geoPartners.util.GeometryConverter;
 import com.pedro.geoPartners.util.GeometryDeserializer;
+import com.pedro.geoPartners.util.GeometryType;
 import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.util.UUID;
+import org.hibernate.annotations.Type;
 import org.locationtech.jts.geom.Geometry;
-
 
 /**
  *
@@ -30,16 +30,17 @@ public class Partner {
 
     private String tradingName;
     private String ownerName;
+    @Column(unique = true)
     private String document;
 
-    @Column(columnDefinition = "geometry(Point,4326)")
     @JsonDeserialize(using = GeometryDeserializer.class)
-    @Convert(converter = GeometryConverter.class)
+    @Type(GeometryType.class)
+    @Column(columnDefinition = "geometry(Point,4326)")
     private Geometry address;
 
-    @Column(columnDefinition = "geometry(MultiPolygon,4326)")
     @JsonDeserialize(using = GeometryDeserializer.class)
-    @Convert(converter = GeometryConverter.class)
+    @Type(GeometryType.class)
+    @Column(columnDefinition = "geometry(MultiPolygon,4326)")
     private Geometry coverageArea;
 
     public UUID getId() {
@@ -74,6 +75,7 @@ public class Partner {
         this.document = document;
     }
 
+    @JsonIgnore
     public Geometry getAddress() {
         return address;
     }
@@ -82,13 +84,14 @@ public class Partner {
         this.address = address;
     }
 
+    @JsonIgnore
     public Geometry getCoverageArea() {
         return coverageArea;
     }
-
+    
     public void setCoverageArea(Geometry coverageArea) {
         this.coverageArea = coverageArea;
     }
-    
+
     
 }

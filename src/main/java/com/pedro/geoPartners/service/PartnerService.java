@@ -24,5 +24,9 @@ public interface PartnerService {
     public List<Partner> getPartners();
     
     public List<Partner> searchBestPartners(Geometry clientAddress) throws IOException;
+   
+    public Partner updatePartner(Partner partner) throws JsonProcessingException;
+    
+    public void deletePartner(String document);
     
 }

@@ -19,5 +19,7 @@ public interface PartnerRepository extends JpaRepository<Partner, UUID> {
 
     @Override
     public Optional<Partner> findById(UUID id);
-   
+    
+    public Optional<Partner> findByDocument(String document);
+
 }

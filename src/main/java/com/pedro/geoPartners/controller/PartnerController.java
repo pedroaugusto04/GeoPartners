@@ -70,13 +70,15 @@ public class PartnerController {
     }
 
     @PostMapping("/logic/update")
-    public String updateLogic() {
-        return "update";
+    public ResponseEntity<String> updateLogic(@RequestBody Partner partner) throws JsonProcessingException {
+        partnerService.updatePartner(partner);
+        return ResponseEntity.ok("Partner successfully updated!");
     }
 
     @RequestMapping("/logic/delete")
-    public String deleteLogic() {
-        return "delete";
+    public ResponseEntity<String> deleteLogic(@RequestBody String document) {
+        partnerService.deletePartner(document);
+        return ResponseEntity.ok("Partner sucessfully deleted!");
     }
 
     @PutMapping("/logic/search")

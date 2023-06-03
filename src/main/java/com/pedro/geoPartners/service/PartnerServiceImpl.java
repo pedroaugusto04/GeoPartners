@@ -33,6 +33,7 @@ public class PartnerServiceImpl implements PartnerService {
 
     @Override
     public Partner savePartner(Partner partner) throws JsonProcessingException {
+        System.out.println(partner.getCoverageArea());
         return partnerRepository.save(partner);
     }
 
@@ -44,6 +45,21 @@ public class PartnerServiceImpl implements PartnerService {
     @Override
     public List<Partner> getPartners() {
         return partnerRepository.findAll();
+    }
+    
+    public void deletePartner(String document){
+        System.out.println(document);
+        partnerRepository.delete(partnerRepository.findByDocument(document).orElseThrow()); // partner not found
+    }
+
+    @Override
+    public Partner updatePartner(Partner partner) throws JsonProcessingException {
+        Partner partnerToUpdate = partnerRepository.findByDocument(partner.getDocument()).orElseThrow(); /*partner not found */
+        partnerToUpdate.setAddress(partner.getAddress());
+        partnerToUpdate.setCoverageArea(partner.getCoverageArea());
+        partnerToUpdate.setOwnerName(partner.getOwnerName());
+        partnerToUpdate.setTradingName(partner.getTradingName());
+        return savePartner(partnerToUpdate);
     }
 
     @Override

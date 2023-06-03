@@ -1,9 +1,14 @@
 document.querySelector("#delete-form").addEventListener("submit",function(event){
     event.preventDefault();
-    var formData = new FormData(this);
+    const Idocument = document.querySelector("#documentInput");
     fetch("/geopartners/logic/delete", {
       method: 'POST',
-      body: formData
+      headers: {
+        "Content-Type": "application/json"
+    },
+      body: JSON.stringify({
+          document: Idocument.value
+      })
     })
     .then(response => response.text())
     .then(message => alert(message))
