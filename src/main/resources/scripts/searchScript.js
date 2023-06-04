@@ -87,11 +87,17 @@ document.querySelector("#search-form").addEventListener("submit", function (even
         },
         body: formDataJson
     })
-            .then(response => response.json())
-            .then(data => loadTable(data))
-            .catch(error => {
-                console.error(error);
-            })
+        .then(response => response.json())
+        .then(data => {
+            if (Object.keys(data).length > 0){
+                loadTable(data);
+            } else {
+                alert("No partners nearby");
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        })
 });
 
 function loadTable(data) {

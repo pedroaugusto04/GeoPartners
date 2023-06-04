@@ -5,9 +5,11 @@
 package com.pedro.geoPartners.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.pedro.geoPartners.exceptions.PartnerNotFoundException;
 import com.pedro.geoPartners.model.Partner;
 import com.pedro.geoPartners.service.PartnerService;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -30,7 +32,7 @@ public class PartnerController {
     public PartnerController(PartnerService partnerService) {
         this.partnerService = partnerService;
     }
-
+    
     @RequestMapping("/")
     public String home() {
         return "home";
@@ -63,19 +65,19 @@ public class PartnerController {
 
     @PostMapping("/logic/register")
     @ResponseBody
-    public ResponseEntity<String> registerLogic(@RequestBody Partner partner) throws JsonProcessingException {
+    public ResponseEntity<String> registerLogic(@RequestBody Partner partner) throws JsonProcessingException, SQLException {
         partnerService.savePartner(partner);
         return ResponseEntity.ok("Partner successfully created!");
     }
 
     @PostMapping("/logic/update")
-    public ResponseEntity<String> updateLogic(@RequestBody Partner partner) throws JsonProcessingException {
+    public ResponseEntity<String> updateLogic(@RequestBody Partner partner) throws JsonProcessingException, PartnerNotFoundException, SQLException {
         partnerService.updatePartner(partner);
         return ResponseEntity.ok("Partner successfully updated!");
     }
 
     @RequestMapping("/logic/delete")
-    public ResponseEntity<String> deleteLogic(@RequestBody Partner partner) {
+    public ResponseEntity<String> deleteLogic(@RequestBody Partner partner) throws PartnerNotFoundException {
         partnerService.deletePartner(partner.getDocument());
         return ResponseEntity.ok("Partner sucessfully deleted!");
     }

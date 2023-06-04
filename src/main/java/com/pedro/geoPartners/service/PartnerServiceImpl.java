@@ -5,15 +5,16 @@
 package com.pedro.geoPartners.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.pedro.geoPartners.exceptions.PartnerNotFoundException;
 import com.pedro.geoPartners.model.Partner;
 import com.pedro.geoPartners.repository.PartnerRepository;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import java.util.stream.Collectors;
 import org.locationtech.jts.geom.Geometry;
 import org.springframework.stereotype.Service;
@@ -32,27 +33,25 @@ public class PartnerServiceImpl implements PartnerService {
     }
 
     @Override
-    public Partner savePartner(Partner partner) throws JsonProcessingException {
+    public Partner savePartner(Partner partner) throws JsonProcessingException, SQLException {
         return partnerRepository.save(partner);
-    }
-
-    @Override
-    public Partner getPartnerById(UUID id) {
-        return partnerRepository.findById(id).orElseThrow( /* id not found */);
     }
 
     @Override
     public List<Partner> getPartners() {
         return partnerRepository.findAll();
     }
-    
-    public void deletePartner(String document){
-        partnerRepository.delete(partnerRepository.findByDocument(document).orElseThrow()); // partner not found
+
+    @Override
+    public void deletePartner(String document) throws PartnerNotFoundException {
+        partnerRepository.delete(partnerRepository.findByDocument(document)
+                .orElseThrow(() -> new PartnerNotFoundException("Partner not found")));
     }
 
     @Override
-    public Partner updatePartner(Partner partner) throws JsonProcessingException {
-        Partner partnerToUpdate = partnerRepository.findByDocument(partner.getDocument()).orElseThrow(); /*partner not found */
+    public Partner updatePartner(Partner partner) throws JsonProcessingException, PartnerNotFoundException, SQLException {
+        Partner partnerToUpdate = partnerRepository.findByDocument(partner.getDocument())
+                .orElseThrow(() -> new PartnerNotFoundException("Partner not found"));
         partnerToUpdate.setAddress(partner.getAddress());
         partnerToUpdate.setCoverageArea(partner.getCoverageArea());
         partnerToUpdate.setOwnerName(partner.getOwnerName());
@@ -82,7 +81,7 @@ public class PartnerServiceImpl implements PartnerService {
                 .sorted(Map.Entry.comparingByValue(Comparator.naturalOrder()))
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
-        
+
         return sortedBestPartners;
     }
 }

@@ -8,29 +8,29 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <title>GeoPartners</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" th:href="@{/styles/search.css}" />
-        <script th:src="@{/scripts/searchScript.js}" defer></script>
-        <script th:src="@{https://unpkg.com/axios/dist/axios.min.js}"></script>
-        <link rel="stylesheet" th:href="@{https://unpkg.com/leaflet@1.9.3/dist/leaflet.css}"
+        <link rel="stylesheet" href="../styles/search.css" />
+        <script src="../scripts/searchScript.js" defer></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
         crossorigin=""/>
-        <script th:src="@{https://unpkg.com/leaflet@1.9.3/dist/leaflet.js}"
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
         crossorigin=""></script>
-        <link rel="stylesheet" th:href="@{https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.css}" />  
-        <script th:src="@{https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.min.js}"></script>  
-        <script th:src="@{https://unpkg.com/@turf/turf@latest}"></script>
+        <link rel="stylesheet" href="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.css" />  
+        <script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.min.js"></script>  
+        <script src="https://unpkg.com/@turf/turf@latest"></script>
     </head>
     <body>
-        <main class = "main">
-            <div class = "title">
+        <main class="main">
+            <div class="title">
                 <h1> BEST PARTNERS</h1> 
             </div>
-            <form id = "search-form">
+            <form id="search-form">
                 <label for="address"> Insert Your Address: <br><br></label>
-                <div id="map" style = " height: 400px; width: 1000px;";></div><br>
-                <button type = "submit">SUBMIT</button>
+                <div id="map" style="height: 400px; width: 1000px;"></div><br>
+                <button type="submit">SUBMIT</button>
             </form>
-            <div class = "div-table">
-                <table id = "table" >
+            <div class="div-table">
+                <table id="table">
                     <thead>
                         <tr>
                             <th>Place</th>

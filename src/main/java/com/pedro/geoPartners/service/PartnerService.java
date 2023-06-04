@@ -5,10 +5,11 @@
 package com.pedro.geoPartners.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.pedro.geoPartners.exceptions.PartnerNotFoundException;
 import com.pedro.geoPartners.model.Partner;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
-import java.util.UUID;
 import org.locationtech.jts.geom.Geometry;
 
 /**
@@ -17,16 +18,14 @@ import org.locationtech.jts.geom.Geometry;
  */
 public interface PartnerService {
     
-    public Partner savePartner(Partner partner) throws JsonProcessingException;
-    
-    public Partner getPartnerById(UUID id);
+    public Partner savePartner(Partner partner) throws JsonProcessingException, SQLException;
     
     public List<Partner> getPartners();
     
     public List<Partner> searchBestPartners(Geometry clientAddress) throws IOException;
    
-    public Partner updatePartner(Partner partner) throws JsonProcessingException;
+    public Partner updatePartner(Partner partner) throws JsonProcessingException,PartnerNotFoundException, SQLException;
     
-    public void deletePartner(String document);
+    public void deletePartner(String document) throws PartnerNotFoundException;
     
 }
