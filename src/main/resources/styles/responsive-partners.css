@@ -1,0 +1,23 @@
+
+@media (max-width: 1370px) {
+    .title h1 {
+        font-size: 6vw;
+    }
+}
+
+
+@media (max-width: 801px) {
+    .title h1{
+        font-size: 10vw;
+    }
+}
+@media (max-width: 350px) {
+    .title h1{
+        font-size: 15vw;
+    }
+
+    #table th,td {
+        padding-right: 3px;
+        padding-left: 3px;
+    }
+}

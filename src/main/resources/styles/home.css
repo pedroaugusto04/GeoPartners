@@ -16,24 +16,25 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this t
     scroll-behavior: smooth;
 }
 
-html, body {
-    height: 100%;
-    width: 100%;
+html,body {
     margin: 0;
     padding: 0;
- }
+    width: 100%;
+    height: 100vh;
+}
 
 
 .header {
     background-color: rgb(82, 161, 82);
-    height: 10%;
+    height: 10vh;
+    width: 100%;
     display: flex;
     align-items: center;
 }
 
 .header h1 {
-    font-size: 50px;
-    margin-left: 10px;
+    font-size: 3vw;
+    margin-left: 0.5%;
     font-family: 'Lato', sans-serif;
 }
 
@@ -79,11 +80,11 @@ html, body {
     background-color: #ccc; 
 }
 
-footer {
+.credits {
     width: 100%;
-    height: 5%;
+    height: 5vh;
     background-color: rgb(82, 161, 82);
-    font-size: 13px;
+    font-size: 0.75vw;
 }
 
 .credits p {
