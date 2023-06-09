@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "pom.xml",
+      "use": "@vercel/static-build"
+    },
+    {
+      "src": "src/main/java/com/example/Application.java",
+      "use": "@vercel/java-server"
+    }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "src/main/java/com/example/Application.java" }
+  ]
+}
