@@ -101,7 +101,7 @@ document.querySelector("#search-form").addEventListener("submit", function (even
 });
 
 function loadTable(data) {
-    const table = document.querySelector("#table");
+    const table = document.querySelector(".table");
     count = 0;
     while (table.rows.length > 1) { // clean before load
         table.deleteRow(1);
@@ -122,7 +122,7 @@ function loadTable(data) {
 }
 
 function cleanTable() {
-    const table = document.querySelector("#table");
+    const table = document.querySelector(".table");
     while (table.rows.length > 1) {
         table.deleteRow(1);
     }

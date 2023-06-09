@@ -8,7 +8,7 @@ fetch("/geopartners/logic/partners")
 })
 
 function loadTable(data){
-    const table = document.querySelector("#table");
+    const table = document.querySelector(".table");
     for (const partner of data){
         const row = table.insertRow();
         const idCell = row.insertCell(0);
