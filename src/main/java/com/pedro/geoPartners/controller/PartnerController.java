@@ -12,18 +12,20 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
  * @author pedro
  */
-@Controller
+@RestController
+@CrossOrigin("*")
 @RequestMapping("/geopartners")
 public class PartnerController {
 
@@ -31,36 +33,6 @@ public class PartnerController {
 
     public PartnerController(PartnerService partnerService) {
         this.partnerService = partnerService;
-    }
-    
-    @RequestMapping("/")
-    public String home() {
-        return "home";
-    }
-
-    @RequestMapping("/register")
-    public String registerPage() {
-        return "register";
-    }
-
-    @RequestMapping("/update")
-    public String updatePage() {
-        return "update";
-    }
-
-    @RequestMapping("/delete")
-    public String deletePage() {
-        return "delete";
-    }
-
-    @RequestMapping("/search")
-    public String searchPage() {
-        return "search";
-    }
-
-    @RequestMapping("/partners")
-    public String partnersPage() {
-        return "partners";
     }
 
     @PostMapping("/logic/register")
@@ -84,13 +56,13 @@ public class PartnerController {
 
     @PutMapping("/logic/search")
     @ResponseBody
-    public List<Partner> searchLogic(@RequestBody Partner partner) throws IOException {
-        return partnerService.searchBestPartners(partner.getAddress());
+    public ResponseEntity<List<Partner>> searchLogic(@RequestBody Partner partner) throws IOException {
+        return ResponseEntity.ok(partnerService.searchBestPartners(partner.getAddress()));
 }
 
     @RequestMapping("/logic/partners")
     @ResponseBody
-    public List<Partner> partnersLogic() {
-        return partnerService.getPartners();
+    public ResponseEntity<List<Partner>> partnersLogic() {
+        return ResponseEntity.ok(partnerService.getPartners());
     }
 }
