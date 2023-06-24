@@ -89,7 +89,7 @@ document.querySelector("#update-form").addEventListener("submit", function(event
 
   let formDataJson = JSON.stringify(Object.fromEntries(formData));
 
-  fetch("/geopartners/logic/update", {
+  fetch("http://localhost:8080/geopartners/logic/update", {
     method: "POST",
     headers: {
         "Content-Type": "application/json"
