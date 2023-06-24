@@ -1,3 +1,3 @@
 # GeoPartners
 update of  "JavaWebProject", implementing new features and Front-end.
-See Front-end in: https://pedroaugusto04.github.io/GeoPartners/
+View the front-end by clicking the link: https://pedroaugusto04.github.io/GeoPartners/
