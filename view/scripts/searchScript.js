@@ -80,7 +80,7 @@ document.querySelector("#search-form").addEventListener("submit", function (even
 
     let formDataJson = JSON.stringify(Object.fromEntries(formData));
 
-    fetch("http://localhost:8080/geopartners/logic/search", {
+    fetch("http://127.0.1.1:8080/geopartners/logic/search", {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"

@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author pedro
  */
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 @RequestMapping("/geopartners")
 public class PartnerController {
 
