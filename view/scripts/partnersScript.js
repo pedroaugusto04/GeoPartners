@@ -1,4 +1,4 @@
-fetch("https://192.168.0.111:8080/geopartners/logic/partners")
+fetch("http://192.168.0.111:8080/geopartners/logic/partners")
 .then(response => response.json())
 .then(data => {
     loadTable(data);
