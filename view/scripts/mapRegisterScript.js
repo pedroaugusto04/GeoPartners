@@ -89,7 +89,7 @@ document.querySelector("#register-form").addEventListener("submit", function(eve
 
   let formDataJson = JSON.stringify(Object.fromEntries(formData));
 
-  fetch("http://127.0.1.1:8080/geopartners/logic/register", {
+  fetch("http://192.168.0.111:8080/geopartners/logic/register", {
     method: "POST",
     headers: {
         "Content-Type": "application/json"
