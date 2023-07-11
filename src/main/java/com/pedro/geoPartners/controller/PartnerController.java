@@ -49,8 +49,8 @@ public class PartnerController {
     }
 
     @RequestMapping("/logic/delete")
-    public ResponseEntity<String> deleteLogic(@RequestBody Partner partner) throws PartnerNotFoundException {
-        partnerService.deletePartner(partner.getDocument());
+    public ResponseEntity<String> deleteLogic(@RequestBody String document) throws PartnerNotFoundException {
+        partnerService.deletePartner(document);
         return ResponseEntity.ok("Partner sucessfully deleted!");
     }
 
