@@ -1,0 +1,61 @@
+<mat-card>
+    <mat-toolbar id="place-toolbar" color="primary">
+        <span id="toolbar-title"> Places </span>
+        <div id="search-div">
+            <form [formGroup]="form" id="form-input">
+                <mat-form-field>
+                    <mat-label>Filter</mat-label>
+                    <input matInput placeholder="Trading Name" formControlName= "tradingName">
+                </mat-form-field>
+                <button mat-icon-button (click)="filterByName()">
+                    <mat-icon> search </mat-icon>
+                </button>
+            </form>
+        </div>
+    </mat-toolbar>
+    <table mat-table [dataSource]="partners" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID </th>
+            <td mat-cell *matCellDef="let partner"> {{partner.id}} </td>
+        </ng-container>
+
+        <!-- Slug Column -->
+        <ng-container matColumnDef="ownerName">
+            <th mat-header-cell *matHeaderCellDef> OwnerName </th>
+            <td mat-cell *matCellDef="let partner"> {{partner.ownerName}}</td>
+        </ng-container>
+
+        <!-- City Column -->
+        <ng-container matColumnDef="tradingName">
+            <th mat-header-cell *matHeaderCellDef> Trading Name </th>
+            <td mat-cell *matCellDef="let partner"> {{partner.tradingName}} </td>
+        </ng-container>
+
+        <!-- State Column -->
+        <ng-container matColumnDef="document">
+            <th mat-header-cell *matHeaderCellDef> Document </th>
+            <td mat-cell *matCellDef="let partner"> {{partner.document}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let partner">
+                <button mat-icon-button color="primary" >
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="onDelete(partner.document)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+</mat-card>

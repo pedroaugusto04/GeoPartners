@@ -1,0 +1,35 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+router-outlet {
+    flex:1;
+    position: relative;
+}
+
+
+app-footer {
+    position: absolute;
+    height: 10%;
+    width: 100%;
+}
+
+
+@import '@angular/material/theming';
+@include mat-core();
+
+$custom-primary: mat-palette($mat-green, A400);
+$custom-secondary: mat-palette($mat-gray, 800);
+$custom-warn: mat-palette($mat-red);
+
+$my-theme: mat-light-theme($custom-primary, $custom-secondary, $custom-warn);
+
+@include angular-material-theme($my-theme);

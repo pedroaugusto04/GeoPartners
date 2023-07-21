@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,10 +50,10 @@ public class PartnerController {
         return ResponseEntity.ok("Partner successfully updated!");
     }
 
-    @RequestMapping("/logic/delete")
-    public ResponseEntity<String> deleteLogic(@RequestBody String document) throws PartnerNotFoundException {
+    @DeleteMapping("/logic/delete/{document}")
+    public ResponseEntity<String> deleteLogic(@PathVariable String document) throws PartnerNotFoundException {
         partnerService.deletePartner(document);
-        return ResponseEntity.ok("Partner sucessfully deleted!");
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/logic/search")

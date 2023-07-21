@@ -1,0 +1,22 @@
+<mat-card>
+    <mat-toolbar id="place-toolbar" color="primary">
+        <span id="toolbar-title"> Create Place </span>
+    </mat-toolbar>
+    <form [formGroup]="form">
+        <mat-form-field class="field">
+            <input matInput placeholder="Owner Name" formControlName="ownerName">
+        </mat-form-field>
+        <mat-form-field class="field">
+            <input matInput placeholder="Trading Name" formControlName="tradingName">
+        </mat-form-field>
+        <mat-form-field class="field">
+            <input matInput placeholder="Document" formControlName="document">
+        </mat-form-field>
+        <app-leaflet>
+        </app-leaflet>
+        <div id="form-buttons">
+            <button color="primary" mat-raised-button (click)="onSubmit()"> Save </button>
+            <button mat-raised-button (click)="onCancel()">Cancel</button>
+        </div>
+    </form>
+</mat-card>
