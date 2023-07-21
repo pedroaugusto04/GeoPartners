@@ -10,12 +10,6 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-router-outlet {
-    flex:1;
-    position: relative;
-}
-
-
 app-footer {
     position: absolute;
     height: 10%;

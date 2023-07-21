@@ -1,5 +1,12 @@
 <div id="leaflet-div">
-     <h2> Insert your address: </h2>
-     <div  leaflet style="height: 400px; width: 100vh;" [leafletOptions]="options">
+     <h2> Insert your Address / Coverage Area: </h2>
+     <div leaflet style="height: 400px; width: 100vh;"
+     leafletDraw
+     [leafletOptions]="options"
+     [leafletDrawOptions]="drawOptions"
+     [leafletLayersControl]="layersControl"
+     [leafletLayers]="layers"
+     (leafletDrawCreated)="onDrawCreated($event)">
+     <div [leafletLayer]="drawnItems"></div>
      </div>
 </div>

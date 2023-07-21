@@ -18,8 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import {MatSnackBarModule } from '@angular/material/snack-bar';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { LeafletComponent } from '../map/leaflet/leaflet.component';
-
-
+import { LeafletDrawModule } from '@asymmetrik/ngx-leaflet-draw';
 
 @NgModule({
   declarations: [
@@ -43,7 +42,8 @@ import { LeafletComponent } from '../map/leaflet/leaflet.component';
     ReactiveFormsModule,
     MatInputModule,
     MatSnackBarModule,
-    LeafletModule
+    LeafletModule,
+    LeafletDrawModule,
   ]
 })
 export class PartnersModule { }
