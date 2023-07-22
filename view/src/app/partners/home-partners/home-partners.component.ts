@@ -11,7 +11,7 @@ export class HomePartnersComponent {
   ImagePath: string;
 
   constructor(private router: Router, private route: ActivatedRoute) { 
-    this.ImagePath = '/assets/images/image.png';
+    this.ImagePath = 'assets/image.png';
   }
 
 
