@@ -19,6 +19,8 @@ import {MatSnackBarModule } from '@angular/material/snack-bar';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { LeafletComponent } from '../map/leaflet/leaflet.component';
 import { LeafletDrawModule } from '@asymmetrik/ngx-leaflet-draw';
+import { SeeBestPartnersComponent } from './see-best-partners/see-best-partners.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { LeafletDrawModule } from '@asymmetrik/ngx-leaflet-draw';
     RegisterPartnerComponent,
     UpdatePartnerComponent,
     BestPartnersComponent,
-    LeafletComponent
+    LeafletComponent,
+    SeeBestPartnersComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,

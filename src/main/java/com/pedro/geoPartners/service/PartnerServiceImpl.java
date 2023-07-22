@@ -49,14 +49,14 @@ public class PartnerServiceImpl implements PartnerService {
     }
 
     @Override
-    public Partner updatePartner(Partner partner) throws JsonProcessingException, PartnerNotFoundException, SQLException {
-        Partner partnerToUpdate = partnerRepository.findByDocument(partner.getDocument())
+    public Partner updatePartner(Partner partner, String document) throws JsonProcessingException, PartnerNotFoundException, SQLException {
+        Partner partnerToUpdate = partnerRepository.findByDocument(document)
                 .orElseThrow(() -> new PartnerNotFoundException("Partner not found"));
         partnerToUpdate.setAddress(partner.getAddress());
         partnerToUpdate.setCoverageArea(partner.getCoverageArea());
         partnerToUpdate.setOwnerName(partner.getOwnerName());
         partnerToUpdate.setTradingName(partner.getTradingName());
-        return savePartner(partnerToUpdate);
+        return partnerRepository.save(partnerToUpdate);
     }
 
     @Override

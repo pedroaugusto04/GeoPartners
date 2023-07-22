@@ -1,9 +1,38 @@
-#leaflet-div {
+#map {
     display: flex;
     justify-content: center;
-    align-items: start;
-    flex-wrap: wrap;
+    align-items: center;
+   flex-wrap: wrap;
     height: 500px;
     width: 100vh;
 }
 
+.leaflet-top{
+    height: 10%
+}
+
+.search-address, .form-address, .input-address {
+    height: 100%;
+}
+
+.input-address {
+    margin: 5px;
+    border-radius: 8px;
+}
+
+.button-address { 
+    cursor: pointer;
+    background-color: white;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.button-address:hover {
+    color: white;
+    background: black;
+    transform: scale(1.1);
+    transition: all 0.5s;
+}

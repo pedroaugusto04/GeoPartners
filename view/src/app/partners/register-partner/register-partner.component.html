@@ -1,6 +1,6 @@
 <mat-card>
     <mat-toolbar id="place-toolbar" color="primary">
-        <span id="toolbar-title"> Create Place </span>
+        <span id="toolbar-title"> Create Partner </span>
     </mat-toolbar>
     <form [formGroup]="form">
         <mat-form-field class="field">
@@ -12,11 +12,20 @@
         <mat-form-field class="field">
             <input matInput placeholder="Document" formControlName="document">
         </mat-form-field>
+        <mat-form-field class="field hidden">
+            <input matInput readonly placeholder="Address" formControlName="address">
+        </mat-form-field>
+        <mat-form-field class="field hidden">
+            <input matInput readonly placeholder="CoverageArea" formControlName="coverageArea">
+        </mat-form-field>
+        <div id="map-title">
+            <h2> Insert Address / Coverage Area: </h2>
+        </div>
         <app-leaflet>
         </app-leaflet>
         <div id="form-buttons">
-            <button color="primary" mat-raised-button (click)="onSubmit()"> Save </button>
-            <button mat-raised-button (click)="onCancel()">Cancel</button>
+            <button class = "form-button" color="primary" mat-raised-button (click)="onSubmit()"> Save </button>
+            <button class = "form-button" mat-raised-button (click)="onCancel()">Cancel</button>
         </div>
     </form>
 </mat-card>

@@ -12,7 +12,7 @@ import { HomePartnersComponent } from './partners/home-partners/home-partners.co
 import { RegisterPartnerComponent } from './partners/register-partner/register-partner.component';
 import { UpdatePartnerComponent } from './partners/update-partner/update-partner.component';
 import { BestPartnersComponent } from './partners/best-partners/best-partners.component';
-import { FooterComponent } from './footer/footer.component';
+import { SeeBestPartnersComponent } from './partners/see-best-partners/see-best-partners.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTableModule} from '@angular/material/table';
@@ -33,7 +33,7 @@ import { LeafletDrawModule } from '@asymmetrik/ngx-leaflet-draw';
     RegisterPartnerComponent,
     UpdatePartnerComponent,
     BestPartnersComponent,
-    FooterComponent,
+    SeeBestPartnersComponent,
     LeafletComponent
   ],
   imports: [

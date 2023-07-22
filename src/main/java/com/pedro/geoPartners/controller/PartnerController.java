@@ -5,12 +5,15 @@
 package com.pedro.geoPartners.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.pedro.geoPartners.dto.AddressDTO;
 import com.pedro.geoPartners.exceptions.PartnerNotFoundException;
 import com.pedro.geoPartners.model.Partner;
 import com.pedro.geoPartners.service.PartnerService;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,15 +42,15 @@ public class PartnerController {
 
     @PostMapping("/logic/register")
     @ResponseBody
-    public ResponseEntity<String> registerLogic(@RequestBody Partner partner) throws JsonProcessingException, SQLException {
-        partnerService.savePartner(partner);
-        return ResponseEntity.ok("Partner successfully created!");
+    public Partner registerLogic(@RequestBody Partner partner) throws JsonProcessingException, SQLException {
+        return partnerService.savePartner(partner);
+
     }
 
-    @PostMapping("/logic/update")
-    public ResponseEntity<String> updateLogic(@RequestBody Partner partner) throws JsonProcessingException, PartnerNotFoundException, SQLException {
-        partnerService.updatePartner(partner);
-        return ResponseEntity.ok("Partner successfully updated!");
+    @PutMapping("/logic/update/{document}")
+    public Partner updateLogic(@RequestBody Partner partner, @PathVariable String document)
+            throws JsonProcessingException, PartnerNotFoundException, SQLException {
+        return partnerService.updatePartner(partner, document);
     }
 
     @DeleteMapping("/logic/delete/{document}")
@@ -56,11 +59,11 @@ public class PartnerController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/logic/search")
+    @PostMapping("/logic/search")
     @ResponseBody
-    public ResponseEntity<List<Partner>> searchLogic(@RequestBody Partner partner) throws IOException {
-        return ResponseEntity.ok(partnerService.searchBestPartners(partner.getAddress()));
-}
+    public List<Partner> searchLogic(@RequestBody AddressDTO address) throws IOException {
+        return partnerService.searchBestPartners(address.getAddress());
+    }
 
     @RequestMapping("/logic/partners")
     @ResponseBody

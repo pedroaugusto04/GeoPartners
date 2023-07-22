@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'home', component: HomePartnersComponent},
   { path: 'partners', component: SeePartnersComponent},
   { path: 'partners/new', component: RegisterPartnerComponent},
-  { path: 'places/update/:id', component: UpdatePartnerComponent},
+  { path: 'partners/update/:id', component: UpdatePartnerComponent},
   { path: 'partners/best', component: BestPartnersComponent},
 ];
 

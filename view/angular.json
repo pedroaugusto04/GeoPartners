@@ -39,9 +39,10 @@
               "./node_modules/leaflet/dist/leaflet.css",
               "./node_modules/leaflet-draw/dist/leaflet.draw.css",
               "./node_modules/leaflet-draw/dist/leaflet.draw-src.css",
+              "./node_modules/@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css",
               "src/styles.scss"
             ],
-            "scripts": ["node_modules/leaflet/dist/leaflet.js","node_modules/leaflet-draw/dist/leaflet.draw.js","node_modules/leaflet-draw/dist/leaflet.draw-src.js"]
+            "scripts": ["node_modules/leaflet/dist/leaflet.js","node_modules/leaflet-draw/dist/leaflet.draw.js","node_modules/leaflet-draw/dist/leaflet.draw-src.js","./node_modules/@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.min.js","./node_modules/@turf/turf/turf.min.js"]
           },
           "configurations": {
             "production": {
@@ -111,9 +112,11 @@
               "./node_modules/leaflet/dist/leaflet.css",
               "./node_modules/leaflet-draw/dist/leaflet.draw.css",
               "./node_modules/leaflet-draw/dist/leaflet.draw-src.css",
+              "./node_modules/@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css",
               "src/styles.scss"
             ],
-            "scripts": ["node_modules/leaflet/dist/leaflet.js","node_modules/leaflet-draw/dist/leaflet.draw.js","node_modules/leaflet-draw/dist/leaflet.draw-src.js"]
+            "scripts": ["node_modules/leaflet/dist/leaflet.js","node_modules/leaflet-draw/dist/leaflet.draw.js","node_modules/leaflet-draw/dist/leaflet.draw-src.js",
+            "./node_modules/@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.min.js","./node_modules/@turf/turf/turf.min.js"]
           }
         }
       }
