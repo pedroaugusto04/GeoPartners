@@ -9,6 +9,7 @@ import com.pedro.geoPartners.dto.GeometriesDTO;
 import com.pedro.geoPartners.exceptions.PartnerNotFoundException;
 import com.pedro.geoPartners.model.Partner;
 import com.pedro.geoPartners.service.PartnerService;
+import jakarta.validation.Valid;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -42,13 +43,13 @@ public class PartnerController {
 
     @PostMapping("/logic/register")
     @ResponseBody
-    public Partner registerLogic(@RequestBody Partner partner) throws JsonProcessingException, SQLException {
+    public Partner registerLogic(@Valid @RequestBody Partner partner) throws JsonProcessingException, SQLException {
         return partnerService.savePartner(partner);
 
     }
 
     @PutMapping("/logic/update/{document}")
-    public Partner updateLogic(@RequestBody Partner partner, @PathVariable String document)
+    public Partner updateLogic(@Valid @RequestBody Partner partner, @PathVariable String document)
             throws JsonProcessingException, PartnerNotFoundException, SQLException {
         return partnerService.updatePartner(partner, document);
     }
@@ -60,14 +61,12 @@ public class PartnerController {
     }
 
     @PostMapping("/logic/search")
-    @ResponseBody
-    public List<Partner> searchLogic(@RequestBody GeometriesDTO geometries) throws IOException {
-        return partnerService.searchBestPartners(geometries.getAddress(),geometries.getCoverageArea());
+    public List<Partner> searchLogic(@Valid @RequestBody GeometriesDTO geometries) throws IOException {
+        return partnerService.searchBestPartners(geometries.getAddress(), geometries.getCoverageArea());
     }
 
     @RequestMapping("/logic/partners")
-    @ResponseBody
-    public ResponseEntity<List<Partner>> partnersLogic() {
-        return ResponseEntity.ok(partnerService.getPartners());
+    public List<Partner> partnersLogic() {
+        return partnerService.getPartners();
     }
 }

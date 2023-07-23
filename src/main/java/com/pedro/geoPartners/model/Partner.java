@@ -33,8 +33,10 @@ public class Partner {
 
     @NotNull
     private String tradingName;
+    
     @NotNull
     private String ownerName;
+    
     @Column(unique = true)
     @NotNull
     private String document;

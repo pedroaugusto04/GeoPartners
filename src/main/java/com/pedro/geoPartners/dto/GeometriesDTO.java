@@ -39,6 +39,4 @@ public class GeometriesDTO {
         return coverageArea;
     }
     
-    
-    
 }
