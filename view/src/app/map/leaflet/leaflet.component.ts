@@ -131,9 +131,13 @@ export class LeafletComponent {
   };
 
   public onDrawCreated(e: any) {
-    this.clearPoints();
-    this.marker = e.layer;
-    this.drawnItems.addLayer((e as DrawEvents.Created).layer.bindPopup(`${this.marker.getLatLng().lng + ", " + this.marker.getLatLng().lat}`));
+    if (e.layer instanceof L.Marker) {
+      this.marker = e.layer;
+      this.clearPoints();
+      this.drawnItems.addLayer((e as DrawEvents.Created).layer.bindPopup(`${this.marker.getLatLng().lng + ", " + this.marker.getLatLng().lat}`));
+    } else {
+      this.drawnItems.addLayer((e as DrawEvents.Created).layer);
+    }
   }
 
   layersControl = {
