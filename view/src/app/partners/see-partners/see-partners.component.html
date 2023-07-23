@@ -18,25 +18,25 @@
         <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
 
-        <!-- Name Column -->
+        <!-- ID Column -->
         <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef> ID </th>
             <td mat-cell *matCellDef="let partner"> {{partner.id}} </td>
         </ng-container>
 
-        <!-- Slug Column -->
+        <!-- OwnerName Column -->
         <ng-container matColumnDef="ownerName">
             <th mat-header-cell *matHeaderCellDef> OwnerName </th>
             <td mat-cell *matCellDef="let partner"> {{partner.ownerName}}</td>
         </ng-container>
 
-        <!-- City Column -->
+        <!-- tradingName Column -->
         <ng-container matColumnDef="tradingName">
             <th mat-header-cell *matHeaderCellDef> Trading Name </th>
             <td mat-cell *matCellDef="let partner"> {{partner.tradingName}} </td>
         </ng-container>
 
-        <!-- State Column -->
+        <!-- document Column -->
         <ng-container matColumnDef="document">
             <th mat-header-cell *matHeaderCellDef> Document </th>
             <td mat-cell *matCellDef="let partner"> {{partner.document}} </td>

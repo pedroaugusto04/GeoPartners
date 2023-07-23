@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Partner } from '../model/partner';
 import { PartnerService } from '../services/partner.service';
 import { Observable, of } from 'rxjs';
@@ -14,7 +14,7 @@ import { AddressDTO } from '../model/address-dto';
 export class SeeBestPartnersComponent {
 
   bestPartners!: Observable<Partner[]>;
-  displayedColumns = ['id', 'ownerName', 'tradingName', 'document'];
+  displayedColumns = ['id','ownerName', 'tradingName'];
   form: FormGroup;
   lastAddress?: AddressDTO;
 
@@ -24,9 +24,11 @@ export class SeeBestPartnersComponent {
     })
   }
 
-  getBestPartners(record: AddressDTO) {
+  getBestPartners(record: AddressDTO): Observable<Partner[]> {
     this.lastAddress = record;
-    this.bestPartners = this.partnerService.getBest(record);
+    let bestPartners: Observable<Partner[]> = this.partnerService.getBest(record);
+    this.bestPartners = bestPartners;
+    return bestPartners;
   }
 
 

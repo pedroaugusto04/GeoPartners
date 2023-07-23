@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { SeeBestPartnersComponent } from '../see-best-partners/see-best-partners.component';
 import { LeafletComponent } from 'src/app/map/leaflet/leaflet.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { Partner } from '../model/partner';
 
 @Component({
   selector: 'app-best-partners',
@@ -11,6 +13,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class BestPartnersComponent {
 
   form: FormGroup;
+  bestPartners!: Observable<Partner[]>;
   @ViewChild(SeeBestPartnersComponent) seeBestPartnersComponent!: SeeBestPartnersComponent;
   @ViewChild(LeafletComponent) leafletComponent!: LeafletComponent;
   
@@ -22,6 +25,7 @@ export class BestPartnersComponent {
 
   onSearchBestPartners() {
     this.leafletComponent.processMapData(this.form);  
-    this.seeBestPartnersComponent.getBestPartners(this.form.value);
+    this.bestPartners = this.seeBestPartnersComponent.getBestPartners(this.form.value);
+    this.leafletComponent.showBestPartners(this.bestPartners);
   }
 }

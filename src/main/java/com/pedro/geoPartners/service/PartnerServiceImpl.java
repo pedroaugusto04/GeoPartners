@@ -10,12 +10,8 @@ import com.pedro.geoPartners.model.Partner;
 import com.pedro.geoPartners.repository.PartnerRepository;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 import org.locationtech.jts.geom.Geometry;
 import org.springframework.stereotype.Service;
 
@@ -49,7 +45,8 @@ public class PartnerServiceImpl implements PartnerService {
     }
 
     @Override
-    public Partner updatePartner(Partner partner, String document) throws JsonProcessingException, PartnerNotFoundException, SQLException {
+    public Partner updatePartner(Partner partner, String document)
+            throws JsonProcessingException, PartnerNotFoundException, SQLException {
         Partner partnerToUpdate = partnerRepository.findByDocument(document)
                 .orElseThrow(() -> new PartnerNotFoundException("Partner not found"));
         partnerToUpdate.setAddress(partner.getAddress());
@@ -62,26 +59,12 @@ public class PartnerServiceImpl implements PartnerService {
     @Override
     public List<Partner> searchBestPartners(Geometry clientAddressPoint) throws IOException {
         List<Partner> listPartners = partnerRepository.findAll();
-        Iterator<Partner> iter = listPartners.iterator();
-
-        Map<Partner, Double> bestPartners = new HashMap<Partner, Double>();
-
-        while (iter.hasNext()) {
-            Partner partner = iter.next();
-
+        List<Partner> bestPartners = new ArrayList<>(listPartners.size());
+        listPartners.forEach(partner -> {
             if (clientAddressPoint.within(partner.getCoverageArea())) {
-                // calculating the distance between the points 
-                double distance = clientAddressPoint.distance(partner.getAddress());
-                bestPartners.put(partner, distance);
+                bestPartners.add(partner);
             }
-        }
-        //sorting
-        List<Partner> sortedBestPartners = bestPartners.entrySet()
-                .stream()
-                .sorted(Map.Entry.comparingByValue(Comparator.naturalOrder()))
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
-
-        return sortedBestPartners;
+        });
+        return bestPartners;
     }
 }

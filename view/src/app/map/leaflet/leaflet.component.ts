@@ -1,11 +1,13 @@
 import { Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
 import * as L from 'leaflet';
-import { Map, DrawEvents, FeatureGroup, Layer, latLng, tileLayer, Marker, MarkerOptions, Control } from 'leaflet';
+import { Map, DrawEvents, FeatureGroup, Layer, latLng, tileLayer, Marker, MarkerOptions } from 'leaflet';
 import { LeafletService } from '../services/leaflet.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormGroup } from '@angular/forms';
 import '@geoman-io/leaflet-geoman-free';
-
+import { Observable } from 'rxjs';
+import { Partner } from 'src/app/partners/model/partner';
+import * as turf from '@turf/turf'
 
 @Component({
   selector: 'app-leaflet',
@@ -21,12 +23,19 @@ export class LeafletComponent {
   marker!: Marker;
   markerOptions: MarkerOptions;
   map!: Map
+  goldIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
 
   constructor(private leafletService: LeafletService, private snackBar: MatSnackBar) {
     this.markerOptions = {
       icon: L.icon({
         iconUrl: 'marker-icon.png',
-      }),
+      })
     }
   }
   processMapData(form: FormGroup) {
@@ -79,6 +88,19 @@ export class LeafletComponent {
     }
   }
 
+  showBestPartners(bestPartners: Observable<Partner[]>) {
+    let featureCollection = { "type": "FeatureCollection", "features": <any>[] }
+    bestPartners.subscribe((partners: Partner[]) => {
+      partners.forEach(partner => {
+        let pointCoord = JSON.parse(JSON.stringify(partner.address)).coordinates;
+        let point = turf.point(pointCoord);
+        let lon = point.geometry.coordinates[0];
+        let lat = point.geometry.coordinates[1];
+        L.marker([lat, lon], { icon: this.goldIcon }).bindPopup(`${partner.tradingName}`).addTo(this.map);
+      })
+    })
+  }
+
   //  main configs 
   options = {
     layers: [
@@ -109,7 +131,9 @@ export class LeafletComponent {
   };
 
   public onDrawCreated(e: any) {
-    this.drawnItems.addLayer((e as DrawEvents.Created).layer);
+    this.clearPoints();
+    this.marker = e.layer;
+    this.drawnItems.addLayer((e as DrawEvents.Created).layer.bindPopup(`${this.marker.getLatLng().lng + ", " + this.marker.getLatLng().lat}`));
   }
 
   layersControl = {
@@ -156,6 +180,7 @@ export class LeafletComponent {
 
   // open street map search address
   processAddress(address: string, map: Map) {
+    this.clearPoints();
     this.leafletService.processAddress(address).subscribe({
       next: (response: any) => {
         if (response.length === 0) {
@@ -187,6 +212,16 @@ export class LeafletComponent {
       return false;
     }
     return true;
+  }
+
+  clearPoints() {
+    this.map.eachLayer(layer => {
+      if (layer instanceof L.Marker) {
+        if (this.map.getBounds().contains(layer.getLatLng())) {
+          this.map.removeLayer(layer);
+        }
+      }
+    })
   }
 
   onInvalidAddress() {
