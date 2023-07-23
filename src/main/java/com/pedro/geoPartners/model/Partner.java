@@ -15,6 +15,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 import org.hibernate.annotations.Type;
 import org.locationtech.jts.geom.Geometry;
@@ -30,21 +31,26 @@ public class Partner {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @NotNull
     private String tradingName;
+    @NotNull
     private String ownerName;
     @Column(unique = true)
+    @NotNull
     private String document;
 
     @JsonDeserialize(using = GeometryDeserializer.class)
     @JsonSerialize(using = GeometrySerializer.class)
     @Type(GeometryType.class)
     @Column(columnDefinition = "geometry(Point,4326)")
+    @NotNull
     private Geometry address;
 
     @JsonDeserialize(using = GeometryDeserializer.class)
     @JsonSerialize(using = GeometrySerializer.class)
     @Type(GeometryType.class)
     @Column(columnDefinition = "geometry(MultiPolygon,4326)")
+    @NotNull
     private Geometry coverageArea;
 
     public UUID getId() {

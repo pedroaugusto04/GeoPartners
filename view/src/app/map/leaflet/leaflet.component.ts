@@ -31,61 +31,75 @@ export class LeafletComponent {
     shadowSize: [41, 41]
   });
 
+  blueIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
   constructor(private leafletService: LeafletService, private snackBar: MatSnackBar) {
     this.markerOptions = {
-      icon: L.icon({
-        iconUrl: 'marker-icon.png',
-      })
+      icon: this.blueIcon
     }
   }
   processMapData(form: FormGroup) {
-    if (this.isMapReady()) {
-      let geometries = this.drawnItems;
-      let coordinates: number[][][][] = [];
-      geometries.eachLayer(function (layer) {
-        if (layer instanceof L.Polygon) {
-          let polygonCoords = (layer.getLatLngs() as L.LatLng[][]).map(function (latLngs) {
-            return latLngs.map(function (latlng) {
-              return [latlng.lng, latlng.lat];
-            });
+    this.isMapReady();
+    this.clearPoints();
+    let geometries = this.drawnItems;
+    let coordinates: number[][][][] = [];
+    geometries.eachLayer(function (layer) {
+      if (layer instanceof L.Polygon) {
+        let polygonCoords = (layer.getLatLngs() as L.LatLng[][]).map(function (latLngs) {
+          return latLngs.map(function (latlng) {
+            return [latlng.lng, latlng.lat];
           });
+        });
 
-          // the first and last positions in a LinearRing of coordinates must be the same
-          if (polygonCoords.length >= 1) {
-            let firstPoint = polygonCoords[0][0];
-            let lastPoint = polygonCoords[polygonCoords.length - 1][polygonCoords[polygonCoords.length - 1].length - 1];
-            if (firstPoint[0] !== lastPoint[0] || firstPoint[1] !== lastPoint[1]) {
-              polygonCoords[polygonCoords.length - 1].push(firstPoint);
-            }
+        // the first and last positions in a LinearRing of coordinates must be the same
+        if (polygonCoords.length >= 1) {
+          let firstPoint = polygonCoords[0][0];
+          let lastPoint = polygonCoords[polygonCoords.length - 1][polygonCoords[polygonCoords.length - 1].length - 1];
+          if (firstPoint[0] !== lastPoint[0] || firstPoint[1] !== lastPoint[1]) {
+            polygonCoords[polygonCoords.length - 1].push(firstPoint);
           }
-          coordinates.push(polygonCoords);
         }
-      });
+        coordinates.push(polygonCoords);
+      }
+    });
 
-      let formattedMultiPolygon = {
-        "type": "MultiPolygon",
-        "coordinates": coordinates
-      };
-
-      let multiPolygonGeoJson = JSON.stringify(formattedMultiPolygon);
-
-      this.processMapPoint(form);
-
-      form.patchValue({ 'coverageArea': multiPolygonGeoJson })
+    if (coordinates.length === 0) {
+      let error = new Error("No Coverage Area informed.");
+      this.onMapError(error.message);
+      throw error;
     }
+
+    let formattedMultiPolygon = {
+      "type": "MultiPolygon",
+      "coordinates": coordinates
+    };
+
+    let multiPolygonGeoJson = JSON.stringify(formattedMultiPolygon);
+
+    this.processMapPoint(form);
+
+    form.patchValue({ 'coverageArea': multiPolygonGeoJson })
+
+
+
   }
 
   processMapPoint(form: FormGroup) {
-    if (this.isMapReady()) {
-      let point = {
-        "type": "Point",
-        "coordinates": [this.marker.getLatLng().lng, this.marker.getLatLng().lat]
-      }
-
-      var pointGeoJson = JSON.stringify(point);
-
-      form.patchValue({ 'address': pointGeoJson });
+    this.isMapReady();
+    let point = {
+      "type": "Point",
+      "coordinates": [this.marker.getLatLng().lng, this.marker.getLatLng().lat]
     }
+
+    var pointGeoJson = JSON.stringify(point);
+
+    form.patchValue({ 'address': pointGeoJson });
   }
 
   showBestPartners(bestPartners: Observable<Partner[]>) {
@@ -116,9 +130,7 @@ export class LeafletComponent {
   drawOptions = {
     draw: {
       marker: {
-        icon: L.icon({
-          iconUrl: 'marker-icon.png'
-        }),
+        icon: this.blueIcon
       },
       polyline: this.optionFalse,
       rectangle: this.optionFalse,
@@ -187,10 +199,6 @@ export class LeafletComponent {
     this.clearPoints();
     this.leafletService.processAddress(address).subscribe({
       next: (response: any) => {
-        if (response.length === 0) {
-          this.onInvalidAddress();
-          return;
-        }
         let lat = parseFloat(response[0].lat);
         let lon = parseFloat(response[0].lon);
         map.setView([lat, lon], 12);
@@ -207,20 +215,21 @@ export class LeafletComponent {
     })
   };
 
-  isMapReady(): boolean {
+  isMapReady(): void {
     if (!this.map) {
-      alert("Map is loading. Please wait.")
-      return false;
+      let error = new Error("Map is loading. Please wait.");
+      this.onMapError(error.message);
+      throw error;
     } else if (!this.marker) {
-      alert("No address selected");
-      return false;
+      let error = new Error("No address selected");
+      this.onMapError(error.message);
+      throw error;
     }
-    return true;
   }
 
   clearPoints() {
     this.map.eachLayer(layer => {
-      if (layer instanceof L.Marker) {
+      if (layer instanceof L.Marker && layer !== this.marker) {
         if (this.map.getBounds().contains(layer.getLatLng())) {
           this.map.removeLayer(layer);
         }
@@ -228,11 +237,11 @@ export class LeafletComponent {
     })
   }
 
-  onInvalidAddress() {
-    this.snackBar.open("Invalid Address", '', { duration: 4000 });
-  }
-
   onError() {
     this.snackBar.open("Error searching address", '', { duration: 4000 });
+  }
+
+  onMapError(messageError: string) {
+    this.snackBar.open(messageError, '', { duration: 4000 });
   }
 }

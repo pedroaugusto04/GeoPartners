@@ -4,13 +4,16 @@
     </mat-toolbar>
     <form [formGroup]="form">
         <mat-form-field class="field">
-            <input matInput placeholder="Owner Name" formControlName="ownerName">
+            <input matInput placeholder="Owner Name" formControlName="ownerName" required>
+            <mat-error *ngIf="form.get('ownerName')?.invalid">{{formErrorMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field class="field">
-            <input matInput placeholder="Trading Name" formControlName="tradingName">
+            <input matInput placeholder="Trading Name" formControlName="tradingName" required>
+            <mat-error *ngIf="form.get('tradingName')?.invalid">{{formErrorMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field class="field">
-            <input matInput placeholder="Document" formControlName="document">
+            <input matInput placeholder="Document" formControlName="document" required>
+            <mat-error *ngIf="form.get('document')?.invalid">{{formErrorMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field class="field hidden">
             <input matInput readonly placeholder="Address" formControlName="address">

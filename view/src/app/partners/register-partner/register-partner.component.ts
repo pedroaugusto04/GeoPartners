@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { PartnerService } from '../services/partner.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,27 +15,31 @@ export class RegisterPartnerComponent {
   form: FormGroup;
   @ViewChild(LeafletComponent) leafletComponent!: LeafletComponent;
 
-  constructor(private formBuilder: FormBuilder, private partnerService: PartnerService,
+  constructor(private formBuilder: NonNullableFormBuilder, private partnerService: PartnerService,
     private router: Router, private route: ActivatedRoute, private snackBar: MatSnackBar) {
     this.form = this.formBuilder.group({
-      ownerName: [null],
-      tradingName: [null],
-      document: [null],
-      address: [null],
-      coverageArea: [null]
+      ownerName: ['', [Validators.required]],
+      tradingName: ['', [Validators.required]],
+      document: ['', [Validators.required]],
+      address: [''],
+      coverageArea: ['']
     });
   }
 
   onSubmit() {
-    this.leafletComponent.processMapData(this.form);  
-    this.partnerService.save(this.form.value).subscribe({
-      next: () => {
-        this.onSucess();
-      },
-      error: () => {
-        this.onError();
-      }
-    });
+    if (this.form.valid) {
+      this.leafletComponent.processMapData(this.form);
+      this.partnerService.save(this.form.value).subscribe({
+        next: () => {
+          this.onSucess();
+        },
+        error: () => {
+          this.onError();
+        }
+      });
+    } else {
+      this.onFormError();
+    }
   }
 
   onCancel() {
@@ -50,5 +54,12 @@ export class RegisterPartnerComponent {
     this.snackBar.open("Error saving partner", '', { duration: 4000 });
   }
 
+  onFormError(){
+    this.snackBar.open("Incomplete form", '', { duration: 4000 });
+  }
+
+  formErrorMessage() {
+    return 'Field required';
+  }
 }
 

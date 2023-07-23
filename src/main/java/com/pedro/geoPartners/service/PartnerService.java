@@ -22,7 +22,7 @@ public interface PartnerService {
     
     public List<Partner> getPartners();
     
-    public List<Partner> searchBestPartners(Geometry clientAddress) throws IOException;
+    public List<Partner> searchBestPartners(Geometry clientAddress, Geometry clientCoverageArea) throws IOException;
    
     public Partner updatePartner(Partner partner, String document) throws JsonProcessingException,PartnerNotFoundException, SQLException;
     

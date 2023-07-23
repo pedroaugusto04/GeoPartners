@@ -5,7 +5,7 @@
 package com.pedro.geoPartners.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.pedro.geoPartners.dto.AddressDTO;
+import com.pedro.geoPartners.dto.GeometriesDTO;
 import com.pedro.geoPartners.exceptions.PartnerNotFoundException;
 import com.pedro.geoPartners.model.Partner;
 import com.pedro.geoPartners.service.PartnerService;
@@ -61,8 +61,8 @@ public class PartnerController {
 
     @PostMapping("/logic/search")
     @ResponseBody
-    public List<Partner> searchLogic(@RequestBody AddressDTO address) throws IOException {
-        return partnerService.searchBestPartners(address.getAddress());
+    public List<Partner> searchLogic(@RequestBody GeometriesDTO geometries) throws IOException {
+        return partnerService.searchBestPartners(geometries.getAddress(),geometries.getCoverageArea());
     }
 
     @RequestMapping("/logic/partners")

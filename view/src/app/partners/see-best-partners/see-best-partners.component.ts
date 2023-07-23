@@ -4,7 +4,7 @@ import { PartnerService } from '../services/partner.service';
 import { Observable, of } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AddressDTO } from '../model/address-dto';
+import { GeometriesDTO } from '../model/geometries-dto';
 
 @Component({
   selector: 'app-see-best-partners',
@@ -16,7 +16,7 @@ export class SeeBestPartnersComponent {
   bestPartners!: Observable<Partner[]>;
   displayedColumns = ['id','ownerName', 'tradingName'];
   form: FormGroup;
-  lastAddress?: AddressDTO;
+  lastGeometries?: GeometriesDTO;
 
   constructor(private partnerService: PartnerService, private formBuilder: FormBuilder, private snackBar: MatSnackBar) {
     this.form = this.formBuilder.group({
@@ -24,8 +24,8 @@ export class SeeBestPartnersComponent {
     })
   }
 
-  getBestPartners(record: AddressDTO): Observable<Partner[]> {
-    this.lastAddress = record;
+  getBestPartners(record: GeometriesDTO): Observable<Partner[]> {
+    this.lastGeometries = record;
     let bestPartners: Observable<Partner[]> = this.partnerService.getBest(record);
     this.bestPartners = bestPartners;
     return bestPartners;
@@ -33,8 +33,8 @@ export class SeeBestPartnersComponent {
 
 
   filterByName() {
-    if (this.lastAddress) {
-      this.bestPartners = this.partnerService.getBest(this.lastAddress)
+    if (this.lastGeometries) {
+      this.bestPartners = this.partnerService.getBest(this.lastGeometries)
     } else {
       this.onFilterError();
       return;

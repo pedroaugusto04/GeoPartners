@@ -57,11 +57,13 @@ public class PartnerServiceImpl implements PartnerService {
     }
 
     @Override
-    public List<Partner> searchBestPartners(Geometry clientAddressPoint) throws IOException {
+    public List<Partner> searchBestPartners(Geometry clientAddressPoint, Geometry clientCoverageArea) throws IOException {
         List<Partner> listPartners = partnerRepository.findAll();
         List<Partner> bestPartners = new ArrayList<>(listPartners.size());
         listPartners.forEach(partner -> {
-            if (clientAddressPoint.within(partner.getCoverageArea())) {
+            if (clientAddressPoint.within(partner.getCoverageArea())
+                    && partner.getAddress().within(clientCoverageArea)) {
+
                 bestPartners.add(partner);
             }
         });

@@ -16,16 +16,17 @@ export class BestPartnersComponent {
   bestPartners!: Observable<Partner[]>;
   @ViewChild(SeeBestPartnersComponent) seeBestPartnersComponent!: SeeBestPartnersComponent;
   @ViewChild(LeafletComponent) leafletComponent!: LeafletComponent;
-  
-  constructor(private formBuilder: FormBuilder) { 
+
+  constructor(private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
-      address: [null]
+      address: [null],
+      coverageArea:[null]
     });
   }
 
   onSearchBestPartners() {
-    this.leafletComponent.processMapData(this.form);  
-    this.bestPartners = this.seeBestPartnersComponent.getBestPartners(this.form.value);
-    this.leafletComponent.showBestPartners(this.bestPartners);
+      this.leafletComponent.processMapData(this.form);
+      this.bestPartners = this.seeBestPartnersComponent.getBestPartners(this.form.value);
+      this.leafletComponent.showBestPartners(this.bestPartners);
   }
 }
