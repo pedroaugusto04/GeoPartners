@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SeePartnersComponent } from './see-partners.component';
+import { TablePartnersComponent } from './table-partners.component';
 
 describe('SeePartnersComponent', () => {
-  let component: SeePartnersComponent;
-  let fixture: ComponentFixture<SeePartnersComponent>;
+  let component: TablePartnersComponent;
+  let fixture: ComponentFixture<TablePartnersComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SeePartnersComponent]
+      declarations: [TablePartnersComponent]
     });
-    fixture = TestBed.createComponent(SeePartnersComponent);
+    fixture = TestBed.createComponent(TablePartnersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

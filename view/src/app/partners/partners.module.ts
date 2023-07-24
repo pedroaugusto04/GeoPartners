@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomePartnersComponent } from './home-partners/home-partners.component';
-import { RegisterPartnerComponent } from './register-partner/register-partner.component';
-import { UpdatePartnerComponent } from './update-partner/update-partner.component';
+import { FormPartnerComponent } from './form-partner/form-partner.component';
 import { BestPartnersComponent } from './best-partners/best-partners.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { SeePartnersComponent } from './see-partners/see-partners.component';
+import { TablePartnersComponent } from './table-partners/table-partners.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -19,17 +18,14 @@ import {MatSnackBarModule } from '@angular/material/snack-bar';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { LeafletComponent } from '../map/leaflet/leaflet.component';
 import { LeafletDrawModule } from '@asymmetrik/ngx-leaflet-draw';
-import { SeeBestPartnersComponent } from './see-best-partners/see-best-partners.component';
 
 @NgModule({
   declarations: [
-    SeePartnersComponent,
+    TablePartnersComponent,
     HomePartnersComponent,
-    RegisterPartnerComponent,
-    UpdatePartnerComponent,
+    FormPartnerComponent,
     BestPartnersComponent,
     LeafletComponent,
-    SeeBestPartnersComponent,
   ],
   imports: [
     CommonModule,

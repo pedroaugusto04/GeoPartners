@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RegisterPartnerComponent } from './register-partner.component';
+import { FormPartnerComponent } from './form-partner.component';
 
 describe('RegisterPartnerComponent', () => {
-  let component: RegisterPartnerComponent;
-  let fixture: ComponentFixture<RegisterPartnerComponent>;
+  let component: FormPartnerComponent;
+  let fixture: ComponentFixture<FormPartnerComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [RegisterPartnerComponent]
+      declarations: [FormPartnerComponent]
     });
-    fixture = TestBed.createComponent(RegisterPartnerComponent);
+    fixture = TestBed.createComponent(FormPartnerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

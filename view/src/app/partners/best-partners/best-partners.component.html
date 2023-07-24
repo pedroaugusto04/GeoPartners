@@ -1,10 +1,8 @@
-<div id = "map-title">
-    <h2> Insert your Address and Area: </h2>
-</div>
-<app-leaflet>
+
+<app-leaflet [title]="'Insert your Address and Area:'">
 </app-leaflet>
 <div id="form-buttons">
     <button class = "form-button" color="primary" mat-raised-button (click)="onSearchBestPartners()"> Search Best Partners</button>
 </div>
-<app-see-best-partners>
-</app-see-best-partners>
+<app-table-partners [title]="'Best Partners'" [displayedColumns]= "['id', 'ownerName', 'tradingName']" [tableType]= "'best_partners_table'">
+</app-table-partners>   

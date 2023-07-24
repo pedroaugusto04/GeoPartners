@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import * as L from 'leaflet';
 import { Map, DrawEvents, FeatureGroup, Layer, latLng, tileLayer, Marker, MarkerOptions } from 'leaflet';
 import { LeafletService } from '../services/leaflet.service';
@@ -23,6 +23,7 @@ export class LeafletComponent {
   marker!: Marker;
   markerOptions: MarkerOptions;
   map!: Map
+  @Input() title: string = 'Insert Address / Coverage Area:'
   goldIcon = new L.Icon({
     iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png',
     iconSize: [25, 41],

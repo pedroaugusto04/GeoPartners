@@ -5,6 +5,14 @@
     flex-wrap: wrap;
     height: 500px;
     width: 100%;
+    margin-bottom: 1%;
+}
+
+#map-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1%;
 }
 
 .search-address, .form-address, .input-address {
