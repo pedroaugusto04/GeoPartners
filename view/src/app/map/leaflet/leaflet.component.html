@@ -1,6 +1,6 @@
 <div id="map">
      <h2 id = "map-title"> {{title}} </h2>
-     <div leaflet style="height: 400px; width: 90%;"
+     <div leaflet [style.height.px]="height" style="width: 90%;"
      leafletDraw
      [leafletOptions]="options"
      [leafletDrawOptions]="drawOptions"

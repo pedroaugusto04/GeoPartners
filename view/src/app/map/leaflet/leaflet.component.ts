@@ -24,6 +24,8 @@ export class LeafletComponent {
   markerOptions: MarkerOptions;
   map!: Map
   @Input() title: string = 'Insert Address / Coverage Area:'
+  @Input() height: number = 400;
+  @Input() insertPoint: boolean = true;
   goldIcon = new L.Icon({
     iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png',
     iconSize: [25, 41],
@@ -46,7 +48,7 @@ export class LeafletComponent {
     }
   }
   processMapData(form: FormGroup) {
-    this.isMapReady();
+    this.isMapReadyToSearch();
     this.clearPoints();
     let geometries = this.drawnItems;
     let coordinates: number[][][][] = [];
@@ -103,15 +105,16 @@ export class LeafletComponent {
     form.patchValue({ 'address': pointGeoJson });
   }
 
-  showBestPartners(bestPartners: Observable<Partner[]>) {
+  showPartners(partners: Observable<Partner[]>) {
     let featureCollection = { "type": "FeatureCollection", "features": <any>[] }
-    bestPartners.subscribe((partners: Partner[]) => {
+    partners.subscribe((partners: Partner[]) => {
       partners.forEach(partner => {
         let pointCoord = JSON.parse(JSON.stringify(partner.address)).coordinates;
         let point = turf.point(pointCoord);
         let lon = point.geometry.coordinates[0];
         let lat = point.geometry.coordinates[1];
-        L.marker([lat, lon], { icon: this.goldIcon }).bindPopup(`${partner.tradingName}`).addTo(this.map);
+        L.marker([lat, lon], { icon: this.goldIcon }).bindPopup(`Owner: ${partner.ownerName}<br>` +
+        `Trading Name: ${partner.tradingName}<br>` + `Document: ${partner.document}<br>`).addTo(this.map);
       })
     })
   }
@@ -197,32 +200,51 @@ export class LeafletComponent {
 
   // open street map search address
   processAddress(address: string, map: Map) {
-    this.clearPoints();
-    this.leafletService.processAddress(address).subscribe({
-      next: (response: any) => {
-        let lat = parseFloat(response[0].lat);
-        let lon = parseFloat(response[0].lon);
-        map.setView([lat, lon], 12);
-        if (this.marker) {
-          map.removeLayer(this.marker);
+    if (this.insertPoint) {
+      this.clearPoints();
+      this.leafletService.processAddress(address).subscribe({
+        next: (response: any) => {
+          let lat = parseFloat(response[0].lat);
+          let lon = parseFloat(response[0].lon);
+          map.setView([lat, lon], 12);
+          if (this.marker) {
+            map.removeLayer(this.marker);
+          }
+          this.marker = L.marker([lat, lon], this.markerOptions).addTo(map);
+          this.marker.bindPopup(`${address}`);
+        },
+        error: () => {
+          this.onError();
         }
-        this.marker = L.marker([lat, lon], this.markerOptions).addTo(map);
-        this.marker.bindPopup(`${address}`);
-      },
-      error: () => {
-        this.onError();
-      }
 
-    })
-  };
+      })
+    } else {
+      this.leafletService.processAddress(address).subscribe({
+        next: (response: any) => {
+          let lat = parseFloat(response[0].lat);
+          let lon = parseFloat(response[0].lon);
+          map.setView([lat, lon], 12);
+        },
+        error: () => {
+          this.onError();
+        }
+      })
+    }
+  }
+
+
+  isMapReadyToSearch(): void {
+    this.isMapReady();
+    if (!this.marker) {
+      let error = new Error("No address selected");
+      this.onMapError(error.message);
+      throw error;
+    }
+  }
 
   isMapReady(): void {
     if (!this.map) {
       let error = new Error("Map is loading. Please wait.");
-      this.onMapError(error.message);
-      throw error;
-    } else if (!this.marker) {
-      let error = new Error("No address selected");
       this.onMapError(error.message);
       throw error;
     }

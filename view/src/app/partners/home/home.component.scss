@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+
+
+#div-img {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    background-image: url('../../../assets/homeimg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    margin: 0; 
+    position: relative;
+}
+
+#credits {
+    display: flex;
+    align-items: center;
+    justify-content: last baseline;
+    flex-direction: column;
+    color: black;
+} 
+
+#div-text {
+    position: absolute;
+    text-align: center;
+    height: 80%;
+    width: 100%;
+    top: 20%;
+    left: 50%; 
+    transform: translateX(-50%);
+}
+
+#div-text h1 {
+    font-size: 600%;
+    font-family: 'Russo One', sans-serif;
+    word-wrap: break-word;
+}

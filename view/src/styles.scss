@@ -3,10 +3,11 @@
 html,
 body {
     height: 100%;
+    margin:0;
+    padding: 0;
 }
 
 body {
-    margin: 0;
     min-height: 100vh;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
@@ -14,7 +15,7 @@ body {
 @import '@angular/material/theming';
 @include mat-core();
 
-$custom-primary: mat-palette($mat-green, A400);
+$custom-primary: mat-palette($mat-green, A200);
 $custom-secondary: mat-palette($mat-gray, 800);
 $custom-warn: mat-palette($mat-red);
 

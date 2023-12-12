@@ -1,8 +1,7 @@
-
-<app-leaflet [title]="'Insert your Address and Area:'">
-</app-leaflet>
-<div id="form-buttons">
-    <button class = "form-button" color="primary" mat-raised-button (click)="onSearchBestPartners()"> Search Best Partners</button>
+<div id="map-best">
+    <app-leaflet [title]="'Insert your Address and Area:'" [height]="500"></app-leaflet>
+    <div id="form-buttons">
+        <button class="form-button" color="primary" mat-raised-button (click)="onSearchBestPartners()"> Search Best
+            Partners</button>
+    </div>
 </div>
-<app-table-partners [title]="'Best Partners'" [displayedColumns]= "['id', 'ownerName', 'tradingName']" [tableType]= "'best_partners_table'">
-</app-table-partners>   

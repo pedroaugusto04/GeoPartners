@@ -9,7 +9,7 @@ import { first } from 'rxjs';
 })
 export class PartnerService {
 
-  private readonly API = "http://192.168.0.111:8080/geopartners/logic/";
+  private readonly API = "http://192.168.1.5:8080/geopartners/logic/";
 
   private headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
 

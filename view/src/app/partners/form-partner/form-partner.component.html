@@ -15,18 +15,20 @@
             <input matInput placeholder="Document" formControlName="document" required>
             <mat-error *ngIf="form.get('document')?.invalid">{{formErrorMessage()}}</mat-error>
         </mat-form-field>
+
         <mat-form-field class="field hidden">
             <input matInput readonly placeholder="Address" formControlName="address">
         </mat-form-field>
         <mat-form-field class="field hidden">
             <input matInput readonly placeholder="CoverageArea" formControlName="coverageArea">
         </mat-form-field>
-        <app-leaflet id = "leaflet-map">
+        <app-leaflet id="leaflet-map">
         </app-leaflet>
 
         <div id="form-buttons">
-            <button class="form-button" color="primary" mat-raised-button (click)="onSubmit(this.form)"> {{buttonTitle}} </button>
-            <button class="form-button" mat-raised-button (click)="onCancel()">Cancel</button>  
+            <button class="form-button" color="primary" mat-raised-button (click)="onSubmit(this.form)"> {{buttonTitle}}
+            </button>
+            <button class="form-button" mat-raised-button (click)="onCancel()">Cancel</button>
         </div>
     </form>
 </mat-card>

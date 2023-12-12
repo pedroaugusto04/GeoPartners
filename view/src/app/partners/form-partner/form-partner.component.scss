@@ -1,20 +1,26 @@
+html,
+body,
+mat-card {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+}
+
 form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 80%;
 }
 
 mat-card {
     padding: 2%;
 }
 
-#toolbar-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    font-size: 150%;
+#toolbar-title { 
+    font-size: 120%;
+    padding: 4px;
 }
 
 .field {
@@ -27,7 +33,6 @@ form #form-buttons {
     align-items: center;
     width: 100%;
     height: 100%;
-    position: center;
 }
 
 .form-button {

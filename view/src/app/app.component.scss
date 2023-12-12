@@ -1,8 +1,59 @@
-#main-toolbar {
-    height: 10%;
-    font-size: 300%;
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+
+
+html, body { 
+  min-height: 100%; 
 }
 
-.home-container {
-    cursor: pointer;
+.menu-spacer {
+  flex: 1 1 auto;
+}
+
+mat-toolbar-row {
+  height: 100%;
+}
+
+#toolbar-title {
+  display: inline-block;
+  font-family: 'Russo One', sans-serif;
+}
+
+#main-toolbar {
+  height: 10%;
+  font-size: 300%;
+}
+
+#nav-list{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+#home-container {
+  display: flex;
+  width: 30%;
+  height: 100%;
+  align-items: center;
+  justify-content: left;
+  cursor: pointer;
+}
+
+#buttons-nav {
+  display: flex;
+  height: 100%;
+  width: 70%;
+  justify-content: right;
+  align-items: center;
+}
+
+#buttons-nav a {
+height: 50%;
+font-size: 40%;
+margin: 3%;
+}
+
+#logo-icon {
+  background-size: cover;
+  height: 85%;
+  padding-right: 3%;
 }
