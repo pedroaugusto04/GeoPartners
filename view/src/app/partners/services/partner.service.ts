@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Partner } from '../model/partner';
 import { GeometriesDTO } from '../model/geometries-dto';
 import { first } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PartnerService {
 
-  private readonly API = "http://192.168.1.5:8080/geopartners/logic/";
+  private readonly API = environment.baseUrl;
 
   private headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
 
