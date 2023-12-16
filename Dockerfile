@@ -5,8 +5,8 @@ COPY . .
 RUN mvn clean install
 
 FROM openjdk:17-jdk-slim
-COPY --from=maven-build /target/geoPartners-0.0.1-SNAPSHOT.jar /app/geopartners.jar
+COPY --from=maven-build /target/geoPartners-0.0.1-SNAPSHOT.jar geopartners.jar
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "/app/geopartners.jar"]
+ENTRYPOINT ["java", "-jar", "geopartners.jar"]
