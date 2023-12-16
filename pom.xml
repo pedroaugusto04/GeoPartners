@@ -11,7 +11,7 @@
     <groupId>com.pedro</groupId>
     <artifactId>geoPartners</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>geoPartners</name>
     <description>update of &quot;JavaWebProject&quot;, implementing new features and Front-end</description>
     <properties>
