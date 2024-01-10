@@ -9,9 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AppComponent {
   title = 'view';
 
-  constructor(private router: Router, private route: ActivatedRoute) {
-    console.log(this.route.url);
-  }
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   navigateToHome() {
     this.router.navigate(['/home'], { relativeTo: this.route });

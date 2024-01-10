@@ -37,7 +37,7 @@ import { SeePartnersComponent } from './see-partners/see-partners.component';
   ],
   imports: [
     RouterModule.forRoot([], {
-      bindToComponentInputs: true // <-- enable this feature
+      bindToComponentInputs: true
     }),
     BrowserModule,
     AppRoutingModule,

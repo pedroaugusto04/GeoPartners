@@ -1,13 +1,13 @@
 <mat-toolbar id="main-toolbar" color="primary">
   <mat-toolbar-row>
-    <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
+    <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-md>
       <mat-icon>menu</mat-icon>
     </button>
     <div id="home-container" (click)="navigateToHome()">
       <img src="./assets/earth.png" id="logo-icon" alt="Terra">
       <span id="toolbar-title"> GeoPartners</span>
     </div>
-    <div id="buttons-nav" fxShow="true" fxHide.lt-md>
+    <div id="buttons-nav" fxShow="false" fxShow.gt-md="true">
       <a [routerLink]="['./partners']" mat-button>See Partners
         <mat-icon>people</mat-icon>
       </a>
