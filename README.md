@@ -3,14 +3,9 @@ update of  "JavaWebProject", implementing new features and Front-end.
 
 Web application made to interact with a Map API. Allows to see partners registered, register a partner and search best partners through location.
 
-# 🛠️ How to run
+https://geopartners-frontend.onrender.com/home
 
-* This site was deployed using a free resource from Render
-* Free Web Services deployed on Render have a biggest delay before a first access after a specific time
-* So, first of all, you have to send any request to API like `https://geopartners.onrender.com/geopartners/logic/partners`
-* Wait a few seconds and you will see a response:
- <img src="/imgs-readme/img1.png">
- Now, you are ready to go to website https://geopartners-frontend.onrender.com/home
+# 🛠️ How to use
 
 ## See Partners
 In 'See Partners' you will be able to see all partners registered on map
