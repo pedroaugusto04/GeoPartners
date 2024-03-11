@@ -1,4 +1,5 @@
 FROM maven:3.8-openjdk-17 AS maven-build
+WORKDIR /app
 COPY ./pom.xml .
 RUN mvn dependency:go-offline
 COPY . .
