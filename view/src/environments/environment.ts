@@ -1,4 +1,4 @@
 export const environment = {
-    production: false,
-    baseUrl: 'http://localhost:8080/geopartners/logic/'
+    production: true,
+    baseUrl: 'https://geopartners.onrender.com/geopartners/logic/'
 };
