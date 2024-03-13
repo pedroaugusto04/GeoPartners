@@ -1,13 +1,9 @@
-FROM maven:3.8-openjdk-17 AS maven-build
-WORKDIR /app
-COPY ./pom.xml .
-RUN mvn dependency:go-offline
-COPY . .
-RUN mvn clean install
+FROM eclipse-temurin:17-jdk-focal
 
-FROM openjdk:17-jdk-slim
-COPY --from=maven-build /target/geoPartners-0.0.1-SNAPSHOT.jar geopartners.jar
-
+COPY .mvn/ .mvn
+COPY mvnw pom.xml ./
+COPY .env .
+RUN ./mvnw dependency:go-offline
+COPY src ./src
 EXPOSE 8080
-
-ENTRYPOINT ["java", "-jar", "geopartners.jar"]
+ENTRYPOINT ["./mvnw","spring-boot:run"]
