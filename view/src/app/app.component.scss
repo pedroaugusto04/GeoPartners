@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
 
-
-html, body { 
-  min-height: 100%; 
+html,
+body {
+  min-height: 100%;
 }
 
 .menu-spacer {
@@ -14,8 +14,9 @@ mat-toolbar-row {
 }
 
 #toolbar-title {
+  font-size: 2rem;
   display: inline-block;
-  font-family: 'Russo One', sans-serif;
+  font-family: "Russo One", sans-serif;
 }
 
 #main-toolbar {
@@ -23,7 +24,7 @@ mat-toolbar-row {
   font-size: 300%;
 }
 
-#nav-list{
+#nav-list {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -47,9 +48,9 @@ mat-toolbar-row {
 }
 
 #buttons-nav a {
-height: 50%;
-font-size: 40%;
-margin: 3%;
+  height: 50%;
+  font-size: 40%;
+  margin: 3%;
 }
 
 #logo-icon {
