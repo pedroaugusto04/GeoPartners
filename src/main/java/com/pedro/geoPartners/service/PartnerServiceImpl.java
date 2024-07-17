@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.pedro.geoPartners.exceptions.PartnerNotFoundException;
 import com.pedro.geoPartners.model.Partner;
 import com.pedro.geoPartners.repository.PartnerRepository;
+import jakarta.transaction.Transactional;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -29,22 +30,26 @@ public class PartnerServiceImpl implements PartnerService {
     }
 
     @Override
+    @Transactional
     public Partner savePartner(Partner partner) throws JsonProcessingException, SQLException {
         return partnerRepository.save(partner);
     }
 
     @Override
+    @Transactional
     public List<Partner> getPartners() {
         return partnerRepository.findAll();
     }
 
     @Override
+    @Transactional
     public void deletePartner(String document) throws PartnerNotFoundException {
         partnerRepository.delete(partnerRepository.findByDocument(document)
                 .orElseThrow(() -> new PartnerNotFoundException("Partner not found")));
     }
 
     @Override
+    @Transactional
     public Partner updatePartner(Partner partner, String document)
             throws JsonProcessingException, PartnerNotFoundException, SQLException {
         Partner partnerToUpdate = partnerRepository.findByDocument(document)
@@ -57,6 +62,7 @@ public class PartnerServiceImpl implements PartnerService {
     }
 
     @Override
+    @Transactional
     public List<Partner> searchBestPartners(Geometry clientAddressPoint, Geometry clientCoverageArea) throws IOException {
         List<Partner> listPartners = partnerRepository.findAll();
         List<Partner> bestPartners = new ArrayList<>(listPartners.size());
