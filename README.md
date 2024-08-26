@@ -1,5 +1,4 @@
 # GeoPartners
-update of  "JavaWebProject", implementing new features and Front-end.
 
 Web application made to interact with a Map API. Allows to see partners registered, register a partner and search best partners through location.
 
